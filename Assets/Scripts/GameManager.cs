@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviourPun
         photonView.RPC("ImInGame", RpcTarget.AllBuffered);
     }
 
+    [PunRPC]
     void ImInGame()
     {
         playersInGame++;

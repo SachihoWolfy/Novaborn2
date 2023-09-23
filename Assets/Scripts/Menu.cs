@@ -28,25 +28,26 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     private List<GameObject> roomButtons = new List<GameObject>();
     private List<RoomInfo> roomList = new List<RoomInfo>();
 
-    public void StartGame()
+
+    void Start()
     {
-        void Start()
+        // disable the menu buttons at the start
+        if (createRoomButton != null)
         {
-            // disable the menu buttons at the start
             createRoomButton.interactable = false;
-            findRoomButton.interactable = false;
-            // enable the cursor since we hide it when we play the game
-            Cursor.lockState = CursorLockMode.None;
-            // are we in a game?
-            if (PhotonNetwork.InRoom)
-            {
-                // go to the lobby
-                SetScreen(lobbyScreen);
-                UpdateLobbyUI();
-                // make the room visible
-                PhotonNetwork.CurrentRoom.IsVisible = true;
-                PhotonNetwork.CurrentRoom.IsOpen = true;
-            }
+        }
+        findRoomButton.interactable = false;
+        // enable the cursor since we hide it when we play the game
+        Cursor.lockState = CursorLockMode.None;
+        // are we in a game?
+        if (PhotonNetwork.InRoom)
+        {
+            // go to the lobby
+            SetScreen(lobbyScreen);
+            UpdateLobbyUI();
+            // make the room visible
+            PhotonNetwork.CurrentRoom.IsVisible = true;
+            PhotonNetwork.CurrentRoom.IsOpen = true;
         }
     }
 
@@ -71,7 +72,10 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public override void OnConnectedToMaster()
     {
         // enable the menu buttons once we connect to the server
-        createRoomButton.interactable = true;
+        if (createRoomButton != null)
+        {
+            createRoomButton.interactable = true;
+        }
         findRoomButton.interactable = true;
     }
 
