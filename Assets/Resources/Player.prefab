@@ -262,8 +262,8 @@ MonoBehaviour:
   jumpForce: 10
   rig: {fileID: 7857953312316849747}
   arms: {fileID: 7857953312650513395}
-  sensX: 10
-  sensY: 10
+  sensX: 7.03
+  sensY: 7.03
   minY: -90
   maxY: 90
   id: 0
@@ -287,7 +287,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -5287205689110578827}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -591,8 +590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61e907afaf2c004c8084ce3dad23131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 10
-  sensY: 10
+  sensX: 7.03
+  sensY: 7.03
   minY: -90
   maxY: 90
   spectatorMoveSpeed: 10
