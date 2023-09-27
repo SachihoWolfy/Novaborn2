@@ -41,6 +41,10 @@ MonoBehaviour:
   - SpawnPlayer
   - ChangeScene
   - ImInGame
+  - DamageFlash
+  - Die
+  - SpawnBullet
+  - TakeDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
