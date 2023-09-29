@@ -38,6 +38,12 @@ public class PlayerController : MonoBehaviourPun
     private bool flashingDamage;
     public MeshRenderer mr;
     public PlayerWeapon weapon;
+    [Header("Sounds")]
+    public AudioSource AS;
+    public AudioClip hurt;
+    public AudioClip jump;
+    public AudioClip heal;
+    public AudioClip largeJump;
 
 
     // Start is called before the first frame update
@@ -56,6 +62,8 @@ public class PlayerController : MonoBehaviourPun
             TryJump();
         if (Input.GetMouseButtonDown(0))
             weapon.TryShoot();
+        if (Input.GetMouseButtonDown(1))
+            TryLargeJump();
     }
     void Move()
     {
@@ -74,7 +82,27 @@ public class PlayerController : MonoBehaviourPun
         Ray ray = new Ray(transform.position, Vector3.down);
         // shoot the raycast
         if (Physics.Raycast(ray, 1.5f))
+        {
             rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            AS.PlayOneShot(jump);
+        }
+            
+    }
+    void TryLargeJump()
+    {
+        // create a ray facing down
+        Ray ray = new Ray(transform.position, Vector3.down);
+        // shoot the raycast
+        if (Physics.Raycast(ray, 1.5f))
+        {
+            float ogMovespeed = moveSpeed;
+            rig.AddForce(Vector3.up * jumpForce * 1.7f, ForceMode.Impulse);
+            rig.AddForce(Vector3.forward * jumpForce, ForceMode.VelocityChange);
+            AS.PlayOneShot(largeJump);
+            while (!Physics.Raycast(ray, 1.5f)) { moveSpeed = ogMovespeed * 4f; }
+            moveSpeed = ogMovespeed;
+        }
+
     }
 
     private void LateUpdate()
@@ -110,6 +138,10 @@ public class PlayerController : MonoBehaviourPun
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
             rig.isKinematic = true;
         }
+        else
+        {
+            GameUI.instance.Initialize(this);
+        }
     }
 
     [PunRPC]
@@ -117,11 +149,13 @@ public class PlayerController : MonoBehaviourPun
     {
         if (dead)
             return;
+        AS.PlayOneShot(hurt);
         curHp -= damage;
         curAttackerId = attackerId;
         // flash the player red
         photonView.RPC("DamageFlash", RpcTarget.Others);
         // update the health bar UI
+        GameUI.instance.UpdateHealthBar();
         // die if no health left
         if (curHp <= 0)
             photonView.RPC("Die", RpcTarget.All);
@@ -167,12 +201,15 @@ public class PlayerController : MonoBehaviourPun
     public void AddKill()
     {
         kills++;
+        GameUI.instance.UpdatePlayerInfoText();
     }
     [PunRPC]
     public void Heal(int amountToHeal)
     {
         curHp = Mathf.Clamp(curHp + amountToHeal, 0, maxHp);
+        AS.PlayOneShot(heal);
         // update the health bar UI
+        GameUI.instance.UpdateHealthBar();
     }
 
 }

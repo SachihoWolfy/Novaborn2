@@ -16,6 +16,12 @@ public class PlayerWeapon : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawnPos;
     private PlayerController player;
+
+    [Header("Sounds")]
+    public AudioSource AS;
+    public AudioClip Shoot;
+    public AudioClip Fail;
+    public AudioClip PowerGet;
     
     
     void Awake()
@@ -29,15 +35,18 @@ public class PlayerWeapon : MonoBehaviour
         if (curAmmo <= 0 || Time.time - lastShootTime < shootRate)
         {
             Debug.Log("No Shooties");
+            AS.PlayOneShot(Fail);
             return;
         }
             
         curAmmo--;
         lastShootTime = Time.time;
         // update the ammo UI
+        GameUI.instance.UpdateAmmoText();
         // spawn the bullet
         Debug.Log("Tried Shooting");
         player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, Camera.main.transform.forward);
+        AS.PlayOneShot(Shoot);
     }
 
     [PunRPC]
@@ -57,6 +66,8 @@ public class PlayerWeapon : MonoBehaviour
     {
         curAmmo = Mathf.Clamp(curAmmo + ammoToGive, 0, maxAmmo);
         // update the ammo text
+        GameUI.instance.UpdateAmmoText();
+        AS.PlayOneShot(PowerGet);
     }
 
 }
