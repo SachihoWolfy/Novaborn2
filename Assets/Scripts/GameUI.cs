@@ -34,7 +34,7 @@ public class GameUI : MonoBehaviour
     }
     public void UpdatePlayerInfoText()
     {
-        playerInfoText.text = "<b>Alive:</b> " + GameManager.instance.alivePlayers + "\n<b > Kills:</ b > " + player.kills;
+        playerInfoText.text = "<b>Alive:</b> " + GameManager.instance.alivePlayers + "\n<b> Kills:</b> " + player.kills;
     }
     public void UpdateAmmoText()
     {

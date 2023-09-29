@@ -11219,7 +11219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705dc11af94730b45845bda6c76f3f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 20
   curAmmo: 100
   maxAmmo: 100
   bulletSpeed: 200

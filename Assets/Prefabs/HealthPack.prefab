@@ -5024,7 +5024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  value: 0
+  value: 12
 --- !u!114 &6634235741642121330
 MonoBehaviour:
   m_ObjectHideFlags: 0
