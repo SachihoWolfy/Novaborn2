@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2380047690544719476}
   m_Layer: 8
   m_Name: Aimsight
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4916,7 +4916,7 @@ GameObject:
   - component: {fileID: 2185930490469277398}
   m_Layer: 0
   m_Name: BulletSpawn
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4948,7 +4948,7 @@ GameObject:
   - component: {fileID: 7712324484286366963}
   m_Layer: 7
   m_Name: Spot Light
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5041,7 +5041,7 @@ GameObject:
   - component: {fileID: 5506176353177771778}
   m_Layer: 0
   m_Name: GunFPV
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5204,7 +5204,7 @@ GameObject:
   - component: {fileID: 7063015382271402026}
   m_Layer: 8
   m_Name: Cannon
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5310,7 +5310,7 @@ GameObject:
   - component: {fileID: 5603556354674975603}
   m_Layer: 7
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5415,7 +5415,7 @@ GameObject:
   - component: {fileID: 7793397817717175362}
   m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5522,7 +5522,7 @@ GameObject:
   - component: {fileID: 24788843161438464}
   m_Layer: 7
   m_Name: Aimsight
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10425,7 +10425,7 @@ GameObject:
   - component: {fileID: 7815228213313214554}
   m_Layer: 7
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10532,7 +10532,7 @@ GameObject:
   - component: {fileID: 1264469745439162291}
   m_Layer: 7
   m_Name: Cannon
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10635,7 +10635,7 @@ GameObject:
   - component: {fileID: 2691791474871927381}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10671,7 +10671,7 @@ GameObject:
   - component: {fileID: 6329936351273415816}
   m_Layer: 7
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10776,7 +10776,7 @@ GameObject:
   - component: {fileID: 3980241931497361264}
   m_Layer: 8
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10882,7 +10882,7 @@ GameObject:
   - component: {fileID: 1973856170447640782}
   m_Layer: 7
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16039,7 +16039,7 @@ GameObject:
   - component: {fileID: 3677802896253357926}
   m_Layer: 0
   m_Name: Arms
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16115,7 +16115,7 @@ GameObject:
   - component: {fileID: 7857953313337097316}
   m_Layer: 7
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16331,7 +16331,7 @@ GameObject:
   - component: {fileID: 7857953314364755253}
   m_Layer: 7
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

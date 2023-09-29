@@ -148,7 +148,10 @@ public class PlayerController : MonoBehaviourPun
     public void TakeDamage(int attackerId, int damage)
     {
         if (dead)
+        {
             return;
+        }
+        Debug.Log("Trying To Take Damage");
         AS.PlayOneShot(hurt);
         curHp -= damage;
         curAttackerId = attackerId;
