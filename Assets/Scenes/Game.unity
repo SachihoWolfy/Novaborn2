@@ -1847,7 +1847,7 @@ MonoBehaviour:
   - {fileID: 1867084530}
   - {fileID: 2104895611}
   alivePlayers: 0
-  postGameTime: 0
+  postGameTime: 5
 --- !u!114 &1139414935
 MonoBehaviour:
   m_ObjectHideFlags: 0

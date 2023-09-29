@@ -4961,12 +4961,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695750730673654424}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7870002, z: 0.59660006}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7857953312298595559}
+  m_Father: {fileID: 7857953312316849743}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &7712324484286366963
 Light:
@@ -10900,7 +10900,6 @@ Transform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6731813732176820212}
   - {fileID: 2289974806531361535}
   m_Father: {fileID: 7857953312316849743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11030,6 +11029,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6731813732176820212}
   - {fileID: 7857953312298595559}
   - {fileID: 7857953312650513392}
   - {fileID: 7857953314336796957}
@@ -11152,6 +11152,7 @@ MonoBehaviour:
   jumpForce: 10
   rig: {fileID: 7857953312316849747}
   arms: {fileID: 7857953312650513395}
+  head: {fileID: 7857953312298595558}
   sensX: 4
   sensY: 4
   minY: -90

@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviourPun
     public float jumpForce;
     [Header("Components")]
     public Rigidbody rig;
-    [Header("Arms")]
+    [Header("Arms and Headlight")]
     public GameObject arms;
+    public GameObject head;
     [Header("Look Sensitivity")]
     public float sensX;
     public float sensY;
@@ -141,6 +142,7 @@ public class PlayerController : MonoBehaviourPun
         else
         {
             GameUI.instance.Initialize(this);
+            head.SetActive(false);
         }
     }
 
