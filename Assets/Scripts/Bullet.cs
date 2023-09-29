@@ -30,4 +30,14 @@ public class Bullet : MonoBehaviour
         }
         Destroy(gameObject);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player") && isMine)
+        {
+            PlayerController player = GameManager.instance.GetPlayer(collision.gameObject);
+            if (player.id != attackerId)
+                player.photonView.RPC("TakeDamage", player.photonPlayer, attackerId, damage);
+        }
+        Destroy(gameObject);
+    }
 }
