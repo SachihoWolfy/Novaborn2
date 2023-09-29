@@ -45,6 +45,11 @@ MonoBehaviour:
   - Die
   - SpawnBullet
   - TakeDamage
+  - AddKill
+  - WinGame
+  - Heal
+  - GiveAmmo
+  - DestroyPickup
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

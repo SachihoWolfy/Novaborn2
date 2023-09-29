@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviourPun
     private int playersInGame;
     // instance
     public static GameManager instance;
+    public float postGameTime;
     void Awake()
     {
         instance = this;
@@ -46,9 +47,29 @@ public class GameManager : MonoBehaviourPun
     }
 
 
-    // Update is called once per frame
-    void Update()
+    public PlayerController GetPlayer(int playerId)
     {
-        
+        return players.First(x => x.id == playerId);
+    }
+    public PlayerController GetPlayer(GameObject playerObj)
+    {
+        return players.First(x => x.gameObject == playerObj);
+    }
+
+    public void CheckWinCondition()
+    {
+        if (alivePlayers == 1)
+            photonView.RPC("WinGame", RpcTarget.All, players.First(x => !x.dead).id);
+    }
+
+    [PunRPC]
+    void WinGame(int winningPlayer)
+    {
+        // set the UI win text
+        Invoke("GoBackToMenu", postGameTime);
+    }
+    void GoBackToMenu()
+    {
+        NetworkManager.instance.ChangeScene("Menu");
     }
 }

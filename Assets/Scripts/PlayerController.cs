@@ -145,8 +145,34 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     void Die()
     {
-
+        curHp = 0;
+        dead = true;
+        GameManager.instance.alivePlayers--;
+        // host will check win condition
+        if (PhotonNetwork.IsMasterClient)
+            GameManager.instance.CheckWinCondition();
+        // is this our local player?
+        if (photonView.IsMine)
+        {
+            if (curAttackerId != 0)
+                GameManager.instance.GetPlayer(curAttackerId).photonView.RPC("AddKill", RpcTarget.All);
+            // set the cam to spectator
+            GetComponentInChildren<CameraController>().SetAsSpectator();
+            // disable the physics and hide the player
+            rig.isKinematic = true;
+            transform.position = new Vector3(0, -50, 0);
+        }
     }
-
+    [PunRPC]
+    public void AddKill()
+    {
+        kills++;
+    }
+    [PunRPC]
+    public void Heal(int amountToHeal)
+    {
+        curHp = Mathf.Clamp(curHp + amountToHeal, 0, maxHp);
+        // update the health bar UI
+    }
 
 }
