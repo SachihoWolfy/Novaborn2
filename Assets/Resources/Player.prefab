@@ -11352,7 +11352,7 @@ MonoBehaviour:
   damage: 20
   curAmmo: 100
   maxAmmo: 100
-  curFpAmmo: 100
+  curFpAmmo: 0
   maxFpAmmo: 100
   bulletSpeed: 75
   shootRate: 1
