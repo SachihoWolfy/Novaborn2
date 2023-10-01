@@ -76,16 +76,17 @@ public class PlayerWeapon : MonoBehaviour
             // spawn the bullet
             Debug.Log("Tried Shooting");
             player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, Camera.main.transform.forward);
-            if (!AS2.isPlaying&&isFiring)
+            if (!AS2.isPlaying && isFiring)
             {
                 AS2.Play(0);
                 isFiring = true;
+
             }
         }
     }
     public void stopFiring()
     {
-        if (!isFiring && AS.isPlaying)
+        if ((!isFiring && AS.isPlaying)||!fpActive)
         {
             AS2.Stop();
         }
