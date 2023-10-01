@@ -12,6 +12,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI playerInfoText;
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI winText;
+    public Slider fpBar;
     public Image winBackground;
     private PlayerController player;
     // instance
@@ -25,6 +26,8 @@ public class GameUI : MonoBehaviour
         player = localPlayer;
         healthBar.maxValue = player.maxHp;
         healthBar.value = player.curHp;
+        fpBar.maxValue = player.weapon.maxFpAmmo;
+        fpBar.value = player.weapon.curFpAmmo;
         UpdatePlayerInfoText();
         UpdateAmmoText();
     }
@@ -40,9 +43,14 @@ public class GameUI : MonoBehaviour
     {
         ammoText.text = player.weapon.curAmmo + " / " + player.weapon.maxAmmo;
     }
+    public void UpdateFPAmmo()
+    {
+        //Implement a slider
+        fpBar.value = player.weapon.curFpAmmo;
+    }
     public void SetWinText(string winnerName)
     {
         winBackground.gameObject.SetActive(true);
-        winText.text = winnerName + " wins";
+        winText.text = winnerName + " WINS";
     }
 }

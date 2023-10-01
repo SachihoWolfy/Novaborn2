@@ -63,6 +63,16 @@ public class PlayerController : MonoBehaviourPun
             TryJump();
         if (Input.GetMouseButtonDown(0))
             weapon.TryShoot();
+        if (Input.GetMouseButton(0))
+        {
+            weapon.TryRapidShoot();
+            weapon.setIsFiring(true);
+        }
+        else
+        {
+            weapon.setIsFiring(false);
+            weapon.stopFiring();
+        }
         if (Input.GetMouseButtonDown(1))
             TryLargeJump();
     }
