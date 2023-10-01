@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviourPun
     [Header("Components")]
     public Rigidbody rig;
     [Header("Arms and Headlight")]
+    public TextMeshPro playername;
     public GameObject arms;
     public GameObject head;
     [Header("Look Sensitivity")]
@@ -144,6 +145,7 @@ public class PlayerController : MonoBehaviourPun
         {
             GameUI.instance.Initialize(this);
             head.SetActive(false);
+            playername.text = player.NickName;
         }
     }
 

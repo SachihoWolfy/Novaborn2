@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviourPun
     void WinGame(int winningPlayer)
     {
         // set the UI win text
-        GameUI.instance.SetWinText(players[winningPlayer].name);
+        GameUI.instance.SetWinText(players[winningPlayer].playername.text);
         Invoke("GoBackToMenu", postGameTime);
     }
     void GoBackToMenu()
