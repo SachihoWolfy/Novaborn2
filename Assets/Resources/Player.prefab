@@ -11279,6 +11279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 10
+  sprintSpeed: 15
   rig: {fileID: 7857953312316849747}
   arms: {fileID: 7857953312650513395}
   head: {fileID: 7857953312298595558}

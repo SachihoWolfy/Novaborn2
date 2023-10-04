@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviourPun
     [Header("Stats")]
     public float moveSpeed;
     public float jumpForce;
+    public float sprintSpeed;
     [Header("Components")]
     public Rigidbody rig;
     [Header("Arms and Headlight")]
@@ -81,8 +82,16 @@ public class PlayerController : MonoBehaviourPun
         // get the input axis
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        Vector3 dir;
         // calculate a direction relative to where we're facing
-        Vector3 dir = (transform.forward * z + transform.right * x) * moveSpeed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            dir = (transform.forward * z + transform.right * x) * sprintSpeed;
+        }
+        else
+        {
+            dir = (transform.forward * z + transform.right * x) * moveSpeed;
+        }
         dir.y = rig.velocity.y;
         // set that as our velocity
         rig.velocity = dir;
