@@ -11,3 +11,5 @@ Right Click activates a super jump.
 Left Click to shoot.
 
 WASD to move
+
+All music is from Ace Combat 3, A project made by Namco.
