@@ -11283,8 +11283,8 @@ MonoBehaviour:
   rig: {fileID: 7857953312316849747}
   arms: {fileID: 7857953312650513395}
   head: {fileID: 7857953312298595558}
-  sensX: 4
-  sensY: 4
+  sensX: 3
+  sensY: 3
   minY: -90
   maxY: 90
   id: 0
@@ -16451,8 +16451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61e907afaf2c004c8084ce3dad23131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 4
-  sensY: 4
+  sensX: 3
+  sensY: 3
   minY: -90
   maxY: 90
   spectatorMoveSpeed: 10
