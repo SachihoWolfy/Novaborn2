@@ -7,5 +7,7 @@ Features multiplayer Via PUN/Photon.
 Currently a battle royale, it will be a Co-op PVE in the future, hopefully with multiple missions with detail, so it might be a short campaign.
 
 Right Click activates a super jump.
+
 Left Click to shoot.
+
 WASD to move
