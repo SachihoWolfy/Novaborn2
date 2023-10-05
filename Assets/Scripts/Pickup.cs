@@ -6,7 +6,8 @@ using Photon.Pun;
 public enum PickupType
 {
     Health,
-    Ammo
+    Ammo,
+    Shield
 }
 
 public class Pickup : MonoBehaviourPun
@@ -27,13 +28,42 @@ public class Pickup : MonoBehaviourPun
 
             if (type == PickupType.Health)
             {
-                Debug.Log("Heal.");
-                player.photonView.RPC("Heal", player.photonPlayer, value);
+                if (player.curHp < player.maxHp)
+                {
+                    Debug.Log("Heal.");
+                    player.photonView.RPC("Heal", player.photonPlayer, value);
+                }
+                else
+                {
+                    Debug.Log("Rejected. Player is FullHP.");
+                    return;
+                }
             }
             else if (type == PickupType.Ammo)
             {
-                Debug.Log("Ammo.");
-                player.photonView.RPC("GiveAmmo", player.photonPlayer, value);
+                if (player.weapon.curFpAmmo < player.weapon.maxFpAmmo)
+                {
+                    Debug.Log("Ammo.");
+                    player.photonView.RPC("GiveAmmo", player.photonPlayer, value);
+                }
+                else
+                {
+                    Debug.Log("Rejected. Player already has Full FirePower.");
+                    return;
+                }
+            }
+            else if (type == PickupType.Shield)
+            {
+                if (player.curShield < 1)
+                {
+                    Debug.Log("Shield.");
+                    player.photonView.RPC("Shield", player.photonPlayer, value);
+                }
+                else
+                {
+                    Debug.Log("Rejected. Player already has shield.");
+                    return;
+                }
             }
                 
 

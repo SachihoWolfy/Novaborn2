@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 public class PlayerController : MonoBehaviourPun
 {
@@ -10,11 +11,17 @@ public class PlayerController : MonoBehaviourPun
     public float moveSpeed;
     public float jumpForce;
     public float sprintSpeed;
+    public float shieldRate;
+    public float iTime;
     [Header("Components")]
     public Rigidbody rig;
     [Header("Arms and Headlight")]
     public GameObject arms;
     public GameObject head;
+    public GameObject shieldBlock;
+    public Material shieldDownMat;
+    public Material shieldUpMat;
+    public GameObject DeadBody;
     [Header("Look Sensitivity")]
     public float sensX;
     public float sensY;
@@ -35,9 +42,13 @@ public class PlayerController : MonoBehaviourPun
     private int curAttackerId;
     public int curHp;
     public int maxHp;
+    public int curShield;
+    public int maxShield;
     public int kills;
     public bool dead;
     private bool flashingDamage;
+    private float lastShieldTime;
+    private float lastDamageTime;
     public MeshRenderer mr;
     public PlayerWeapon weapon;
     [Header("Sounds")]
@@ -46,12 +57,27 @@ public class PlayerController : MonoBehaviourPun
     public AudioClip jump;
     public AudioClip heal;
     public AudioClip largeJump;
-
+    public AudioClip shieldGet;
+    public AudioClip shieldHurt;
+    public AudioClip shieldBreak;
+    [Header("NameTag")]
+    [SerializeField] private TextMeshProUGUI nameText;
 
     // Start is called before the first frame update
     void Start()
     {
+        lastShieldTime = Time.time;
+        if (photonView.IsMine)
+        {
+            nameText.enabled = false;
+            return;
+        }
+        SetName();
+    }
 
+    public void SetName()
+    {
+        nameText.text = photonView.Owner.NickName;
     }
 
     // Update is called once per frame
@@ -76,6 +102,17 @@ public class PlayerController : MonoBehaviourPun
         }
         if (Input.GetMouseButtonDown(1))
             TryLargeJump();
+        if (curShield > 1 && Time.time - lastShieldTime > shieldRate && Time.time - lastDamageTime > shieldRate)
+        {
+            Debug.Log("Trying to regen shield.");
+            lastShieldTime = Time.time;
+            curShield = Mathf.Clamp(curShield + 20, 0, maxShield);
+            GameUI.instance.UpdateShieldBar();
+        }
+        else
+        {
+            Debug.Log("Shield regen unable to at the moment. " + (Time.time - lastShieldTime<shieldRate));
+        }
     }
     void Move()
     {
@@ -172,14 +209,33 @@ public class PlayerController : MonoBehaviourPun
         {
             return;
         }
+        if(Time.time - lastDamageTime < iTime)
+        {
+            Debug.Log("invicibility frames");
+            return;
+        }
+        lastDamageTime = Time.time;
         Debug.Log("Trying To Take Damage");
-        AS.PlayOneShot(hurt);
-        curHp -= damage;
+        if (curShield > 0)
+        {
+            AS.PlayOneShot(shieldHurt);
+            curShield = Mathf.Clamp(curShield - damage, 0, curShield);
+            if(curShield < 1)
+            {
+                photonView.RPC("DeactivateShield", RpcTarget.All);
+            }
+        }
+        else
+        {
+            AS.PlayOneShot(hurt);
+            curHp -= damage;
+        }
         curAttackerId = attackerId;
         // flash the player red
         photonView.RPC("DamageFlash", RpcTarget.Others);
         // update the health bar UI
         GameUI.instance.UpdateHealthBar();
+        GameUI.instance.UpdateShieldBar();
         // die if no health left
         if (curHp <= 0)
             photonView.RPC("Die", RpcTarget.All);
@@ -194,8 +250,15 @@ public class PlayerController : MonoBehaviourPun
         {
             flashingDamage = true;
             Color defaultColor = mr.material.color;
-            mr.material.color = Color.red;
-            yield return new WaitForSeconds(0.05f);
+            if (curShield > 0)
+            {
+                mr.material.color = Color.blue;
+            }
+            else
+            {
+                mr.material.color = Color.red;
+            }
+            yield return new WaitForSeconds(0.1f);
             mr.material.color = defaultColor;
             flashingDamage = false;
         }
@@ -218,8 +281,21 @@ public class PlayerController : MonoBehaviourPun
             GetComponentInChildren<CameraController>().SetAsSpectator();
             // disable the physics and hide the player
             rig.isKinematic = true;
+            photonView.RPC("SpawnDeadBody", RpcTarget.All);
             transform.position = new Vector3(0, -50, 0);
         }
+    }
+    [PunRPC]
+    public void SpawnDeadBody()
+    {
+        GameObject deadBody = Instantiate(DeadBody, transform.position, Quaternion.identity);
+        deadBody.transform.forward = this.transform.forward;
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Vector3 dir;
+        dir = (transform.forward * z + transform.right * x) * moveSpeed;
+        deadBody.GetComponent<Rigidbody>().velocity = dir;
+        deadBody.gameObject.transform.GetChild(1).rotation = arms.transform.rotation;
     }
     [PunRPC]
     public void AddKill()
@@ -235,5 +311,24 @@ public class PlayerController : MonoBehaviourPun
         // update the health bar UI
         GameUI.instance.UpdateHealthBar();
     }
-
+    [PunRPC]
+    public void Shield(int amountToShield)
+    {
+        curShield = Mathf.Clamp(curShield + amountToShield, 0, maxShield);
+        lastShieldTime = Time.time;
+        AS.PlayOneShot(shieldGet);
+        GameUI.instance.UpdateShieldBar();
+        photonView.RPC("ActivateShield", RpcTarget.All);
+    }
+    [PunRPC]
+    public void ActivateShield()
+    {
+        shieldBlock.GetComponent<MeshRenderer>().material = shieldUpMat;
+    }
+    [PunRPC]
+    public void DeactivateShield()
+    {
+        AS.PlayOneShot(shieldBreak);
+        shieldBlock.GetComponent<MeshRenderer>().material = shieldDownMat;
+    }
 }

@@ -13,6 +13,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI winText;
     public Slider fpBar;
+    public Slider shieldBar;
     public Image winBackground;
     private PlayerController player;
     // instance
@@ -28,12 +29,18 @@ public class GameUI : MonoBehaviour
         healthBar.value = player.curHp;
         fpBar.maxValue = player.weapon.maxFpAmmo;
         fpBar.value = player.weapon.curFpAmmo;
+        shieldBar.maxValue = player.maxShield;
+        shieldBar.value = player.curShield;
         UpdatePlayerInfoText();
         UpdateAmmoText();
     }
     public void UpdateHealthBar()
     {
         healthBar.value = player.curHp;
+    }
+    public void UpdateShieldBar()
+    {
+        shieldBar.value = player.curShield;
     }
     public void UpdatePlayerInfoText()
     {
