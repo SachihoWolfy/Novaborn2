@@ -16965,7 +16965,7 @@ MonoBehaviour:
   maxAmmo: 100
   curFpAmmo: 0
   maxFpAmmo: 100
-  bulletSpeed: 75
+  bulletSpeed: 150
   shootRate: 1
   fpRate: 0.2
   fpTime: 5

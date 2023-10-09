@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     private int attackerId;
     private bool isMine;
     public Rigidbody rig;
+    private Vector3 oldPosition;
 
     public void Initialize(int damage, int attackerId, bool isMine)
     {
@@ -17,27 +18,28 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 5.0f);
     }
 
-    void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        // did we hit a player?
-        // if this is the local player's bullet, damage the hit player
-        // we're using client side hit detection
-        if (other.CompareTag("Player") && isMine)
-        {
-            PlayerController player = GameManager.instance.GetPlayer(other.gameObject);
-            if (player.id != attackerId)
-                player.photonView.RPC("TakeDamage", player.photonPlayer, attackerId, damage);
-        }
-        Destroy(gameObject);
+        oldPosition = transform.position;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        if (collision.collider.CompareTag("Player") && isMine)
+        // Shoot a ray between the old and new position to detect collisions
+        RaycastHit hit;
+        if (Physics.Raycast(oldPosition, transform.position - oldPosition, out hit, (transform.position - oldPosition).magnitude))
         {
-            PlayerController player = GameManager.instance.GetPlayer(collision.gameObject);
-            if (player.id != attackerId)
-                player.photonView.RPC("TakeDamage", player.photonPlayer, attackerId, damage);
+            // Handle the collision
+            //Debug.Log("Hit: " + hit.collider.name);
+            if (hit.collider.gameObject.tag == "Player" && isMine)
+            {
+                PlayerController player = GameManager.instance.GetPlayer(hit.collider.gameObject);
+                if (player.id != attackerId)
+                {
+                    player.photonView.RPC("TakeDamage", player.photonPlayer, attackerId, damage);
+                }
+            }
+            if (hit.collider.gameObject.tag != "Bullet")
+                Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }
