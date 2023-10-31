@@ -11,12 +11,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public static NetworkManager instance;
     void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (instance != null && instance != this)
+            gameObject.SetActive(false);
         else
-            Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
     // Start is called before the first frame update
     void Start()
