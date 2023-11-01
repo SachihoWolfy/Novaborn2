@@ -104,14 +104,14 @@ public class PlayerController : MonoBehaviourPun
             TryLargeJump();
         if (curShield > 1 && Time.time - lastShieldTime > shieldRate && Time.time - lastDamageTime > shieldRate)
         {
-            Debug.Log("Trying to regen shield.");
+            //Debug.Log("Trying to regen shield.");
             lastShieldTime = Time.time;
             curShield = Mathf.Clamp(curShield + 20, 0, maxShield);
             GameUI.instance.UpdateShieldBar();
         }
         else
         {
-            Debug.Log("Shield regen unable to at the moment. " + (Time.time - lastShieldTime<shieldRate));
+            //Debug.Log("Shield regen unable to at the moment. " + (Time.time - lastShieldTime<shieldRate));
         }
     }
     void Move()

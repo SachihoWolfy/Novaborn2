@@ -114,7 +114,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     {
         // enable or disable the start game button depending on if we're the host
         startGameButton.interactable = PhotonNetwork.IsMasterClient;
-        //mapList.interactable = PhotonNetwork.IsMasterClient;   
+        mapList.interactable = PhotonNetwork.IsMasterClient;   
         // display all the players
         playerListText.text = "";
         foreach (Player player in PhotonNetwork.PlayerList)
