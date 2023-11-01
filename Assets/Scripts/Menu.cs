@@ -22,6 +22,8 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public TextMeshProUGUI playerListText;
     public TextMeshProUGUI roomInfoText;
     public Button startGameButton;
+    public TMP_Dropdown mapList;
+    public string selectedMap;
     [Header("Lobby Browser")]
     public RectTransform roomListContainer;
     public GameObject roomButtonPrefab;
@@ -112,12 +114,18 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     {
         // enable or disable the start game button depending on if we're the host
         startGameButton.interactable = PhotonNetwork.IsMasterClient;
+        //mapList.interactable = PhotonNetwork.IsMasterClient;   
         // display all the players
         playerListText.text = "";
         foreach (Player player in PhotonNetwork.PlayerList)
             playerListText.text += player.NickName + "\n";
         // set the room info text
-        roomInfoText.text = "<b>Room Name</b>\n" + PhotonNetwork.CurrentRoom.Name;
+        selectedMap = mapList.options[mapList.value].text;
+        roomInfoText.text = "<b>Room Name</b>\n" + PhotonNetwork.CurrentRoom.Name + "\n<b>Current Map</b>\n" + selectedMap;
+    }
+    public void OnMapChange()
+    {
+        UpdateLobbyUI();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -130,7 +138,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
         // tell everyone to load the game scene
-        NetworkManager.instance.photonView.RPC("ChangeScene", RpcTarget.All, "Game");
+        NetworkManager.instance.photonView.RPC("ChangeScene", RpcTarget.All, selectedMap);
     }
     public void OnLeaveLobbyButton()
     {

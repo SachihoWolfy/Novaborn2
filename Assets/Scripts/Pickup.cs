@@ -7,7 +7,8 @@ public enum PickupType
 {
     Health,
     Ammo,
-    Shield
+    Shield,
+    Explosive
 }
 
 public class Pickup : MonoBehaviourPun
@@ -65,10 +66,15 @@ public class Pickup : MonoBehaviourPun
                     return;
                 }
             }
-                
+            else if (type == PickupType.Explosive)
+            {
+                Debug.Log("Explosive.");
+                //IMPLEMENT LATER
+            }
 
-            // destroy the object
-            photonView.RPC("DestroyPickup", RpcTarget.AllBuffered);
+
+                // destroy the object
+                photonView.RPC("DestroyPickup", RpcTarget.AllBuffered);
         }
     }
 

@@ -31,8 +31,8 @@ public class PlayerWeapon : MonoBehaviour
     public AudioClip Fail;
     public AudioClip PowerGet;
     public AudioClip fpShootMP;
-    
-    
+
+
     void Awake()
     {
         // get required components
@@ -51,7 +51,7 @@ public class PlayerWeapon : MonoBehaviour
 
         if (fpActive && Time.time - lastShootTime < fpRate && curFpAmmo > 0)
         {
-            
+            //Decrepit FP_Shoot function. FP Shooting is now done by TryRapidShoot()
         }
         else
         {
@@ -63,8 +63,8 @@ public class PlayerWeapon : MonoBehaviour
             Debug.Log("Tried Shooting");
             player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, Camera.main.transform.forward);
             SoundController.instance.PlaySound(AS, Shoot);
-        }   
-}
+        }
+    }
     public void TryRapidShoot()
     {
         if (curFpAmmo > 0) { fpActive = true; } else { fpActive = false; }
@@ -88,7 +88,7 @@ public class PlayerWeapon : MonoBehaviour
     }
     public void stopFiring()
     {
-        if ((!isFiring && AS.isPlaying)||!fpActive)
+        if ((!isFiring && AS.isPlaying) || !fpActive)
         {
             AS2.Stop();
         }
@@ -120,4 +120,8 @@ public class PlayerWeapon : MonoBehaviour
         AS.PlayOneShot(PowerGet);
     }
 
+    //Implement giveExplosive
+    //Implement TryExplosiveShot
+
+    //Implement weaponModes somewhere
 }

@@ -331,4 +331,6 @@ public class PlayerController : MonoBehaviourPun
     {
         shieldBlock.GetComponent<MeshRenderer>().material = shieldDownMat;
     }
+
+    //Figure out how to launch the player with force. This may have something to do with the "Freeze Position" constraint on the rigidBody.
 }
