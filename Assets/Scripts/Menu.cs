@@ -125,7 +125,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     }
     public void OnMapChange()
     {
-        UpdateLobbyUI();
+        photonView.RPC("UpdateLobbyUI", RpcTarget.All);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
