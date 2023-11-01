@@ -15925,8 +15925,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0.69399357
+  MaxDistance: 3.1642647
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -16977,8 +16977,9 @@ MonoBehaviour:
   AS2: {fileID: 4131249210912893033}
   Shoot: {fileID: 8300000, guid: a683b9e7b0a7006459d5ce5cb714823c, type: 3}
   fpShoot: {fileID: 8300000, guid: a1e1110730879e542b5ea691442489cb, type: 3}
-  Fail: {fileID: 8300000, guid: a3eb708fd33e1724c91289c68f52d6f4, type: 3}
+  Fail: {fileID: 8300000, guid: 8c08980532507494eacedd59b1f33678, type: 3}
   PowerGet: {fileID: 8300000, guid: 79077692c5b61c244ba6e9835615011f, type: 3}
+  fpShootMP: {fileID: 8300000, guid: e4f415687d3067848bd5d081bdd76c1a, type: 3}
 --- !u!198 &1874889028636838422
 ParticleSystem:
   m_ObjectHideFlags: 0

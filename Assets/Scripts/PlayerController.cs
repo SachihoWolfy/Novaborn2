@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviourPun
         if (Physics.Raycast(ray, 1.5f))
         {
             rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            AS.PlayOneShot(jump);
+            SoundController.instance.PlaySound(AS, jump);
         }
             
     }
@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviourPun
             float ogMovespeed = moveSpeed;
             rig.AddForce(Vector3.up * jumpForce * 1.7f, ForceMode.Impulse);
             rig.AddForce(Vector3.forward * jumpForce, ForceMode.VelocityChange);
-            AS.PlayOneShot(largeJump);
+            SoundController.instance.PlaySound(AS, largeJump);
             while (!Physics.Raycast(ray, 1.5f)) { moveSpeed = ogMovespeed * 4f; }
             moveSpeed = ogMovespeed;
         }
@@ -218,16 +218,17 @@ public class PlayerController : MonoBehaviourPun
         Debug.Log("Trying To Take Damage");
         if (curShield > 0)
         {
-            AS.PlayOneShot(shieldHurt);
+            SoundController.instance.PlaySound(AS, shieldHurt);
             curShield = Mathf.Clamp(curShield - damage, 0, curShield);
             if(curShield < 1)
             {
+                SoundController.instance.PlaySound(AS, shieldBreak);
                 photonView.RPC("DeactivateShield", RpcTarget.All);
             }
         }
         else
         {
-            AS.PlayOneShot(hurt);
+            SoundController.instance.PlaySound(AS, hurt);
             curHp -= damage;
         }
         curAttackerId = attackerId;
@@ -328,7 +329,6 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     public void DeactivateShield()
     {
-        AS.PlayOneShot(shieldBreak);
         shieldBlock.GetComponent<MeshRenderer>().material = shieldDownMat;
     }
 }

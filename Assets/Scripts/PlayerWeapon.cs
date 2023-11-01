@@ -30,6 +30,7 @@ public class PlayerWeapon : MonoBehaviour
     public AudioClip fpShoot;
     public AudioClip Fail;
     public AudioClip PowerGet;
+    public AudioClip fpShootMP;
     
     
     void Awake()
@@ -61,7 +62,7 @@ public class PlayerWeapon : MonoBehaviour
             // spawn the bullet
             Debug.Log("Tried Shooting");
             player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, Camera.main.transform.forward);
-            AS.PlayOneShot(Shoot);
+            SoundController.instance.PlaySound(AS, Shoot);
         }   
 }
     public void TryRapidShoot()
@@ -79,6 +80,7 @@ public class PlayerWeapon : MonoBehaviour
             if (!AS2.isPlaying && isFiring)
             {
                 AS2.Play(0);
+                SoundController.instance.PlaySound(AS, fpShootMP);
                 isFiring = true;
 
             }
