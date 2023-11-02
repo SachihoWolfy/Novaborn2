@@ -3030,6 +3030,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2812393766663896541, guid: 105cfe926dbaa3d4b8ccccb0f2de55b1, type: 3}
   m_PrefabInstance: {fileID: 1075777518}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1075777520 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3921907568757469428, guid: 105cfe926dbaa3d4b8ccccb0f2de55b1, type: 3}
+  m_PrefabInstance: {fileID: 1075777518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1075777521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6283966954528185659, guid: 105cfe926dbaa3d4b8ccccb0f2de55b1, type: 3}
+  m_PrefabInstance: {fileID: 1075777518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1075988309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3167,6 +3189,7 @@ GameObject:
   - component: {fileID: 1139414934}
   - component: {fileID: 1139414937}
   - component: {fileID: 1139414938}
+  - component: {fileID: 1139414939}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -3272,6 +3295,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioRPC: {fileID: 530126031}
+--- !u!114 &1139414939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139414933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0585ea6174fdc4f43a13a3f33ec815ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chatLogText: {fileID: 1075777520}
+  chatInput: {fileID: 1075777521}
 --- !u!4 &1149363275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5182188350262739561, guid: d31ebe20d00c72b4cb03e1481954cfb6, type: 3}
