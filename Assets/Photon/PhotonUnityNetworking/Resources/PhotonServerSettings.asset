@@ -58,6 +58,10 @@ MonoBehaviour:
   - JUMPstop
   - PlaySoundRPC
   - Log
+  - FlashDamage
+  - SpawnEnemyBullet
+  - UpdateHealthBar
+  - UpdateShieldBar
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
