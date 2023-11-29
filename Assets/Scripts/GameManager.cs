@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviourPun
     public PlayerController[] players;
     public Transform[] spawnPoints;
     public int alivePlayers;
-    public bool pvp;
     private int playersInGame;
     // instance
     public static GameManager instance;
     public float postGameTime;
+    [Header("Game Modifiers")]
+    public bool pvp;
+    public bool debug;
     void Awake()
     {
         instance = this;
