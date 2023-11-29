@@ -727,8 +727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0471fa782511df48915012f26422df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killNumEnemies: 0
-  enemyAmount: 2
+  killNumEnemies: 1
+  enemyAmount: 1
   getToEnd: 1
   endTrigger: {fileID: 1309084754}
   killBoss: 0

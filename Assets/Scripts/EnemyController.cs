@@ -144,7 +144,10 @@ public class EnemyController : MonoBehaviourPun
         // update the health bar
         healthBar.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp);
         if (curHp <= 0)
+        {
+            MissionManager.instance.KillEnemy();
             Die();
+        }
         else
         {
             photonView.RPC("FlashDamage", RpcTarget.All);

@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
                     player.photonView.RPC("TakeDamage", player.photonPlayer, attackerId, damage);
                 }
             }
-            if (hit.collider.gameObject.tag == "Enemy")
+            if (hit.collider.gameObject.tag == "Enemy" && isMine)
             {
                 EnemyController enemy = hit.collider.GetComponent<EnemyController>();
                 enemy.photonView.RPC("TakeDamage", Photon.Pun.RpcTarget.MasterClient, damage);
