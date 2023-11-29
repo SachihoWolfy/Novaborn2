@@ -38,13 +38,12 @@ public class Bullet : MonoBehaviour
                     player.photonView.RPC("TakeDamage", player.photonPlayer, attackerId, damage);
                 }
             }
-            if (hit.collider.gameObject.tag == "Enemy" && isMine && GameManager.instance.pvp)
+            if (hit.collider.gameObject.tag == "Enemy")
             {
-                EnemyController Enemy = hit.collider.gameObject.GetComponent<EnemyController>();
-                Enemy.TakeDamage(damage);
-                //add a way to add killed enemies to kill count.
+                EnemyController enemy = hit.collider.GetComponent<EnemyController>();
+                enemy.photonView.RPC("TakeDamage", Photon.Pun.RpcTarget.MasterClient, damage);
             }
-            if (hit.collider.gameObject.tag != "Bullet")
+            if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Pickup")
                 Destroy(gameObject);
         }
     }

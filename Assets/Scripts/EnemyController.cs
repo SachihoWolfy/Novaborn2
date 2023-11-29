@@ -90,9 +90,7 @@ public class EnemyController : MonoBehaviourPun
     // Aims at target player
     public void AimAtPlayer(GameObject hands)
     {
-        Vector3 dir = targetPlayer.transform.position - hands.transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        hands.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        hands.transform.LookAt(targetPlayer.transform.position);
     }
     // attacks the targeted player
     void Attack()
@@ -100,7 +98,7 @@ public class EnemyController : MonoBehaviourPun
         lastAttackTime = Time.time;
         //targetPlayer.photonView.RPC("TakeDamage", targetPlayer.photonPlayer, damage);
         SoundController.instance.PlaySound(AS, fire);
-        photonView.RPC("SpawnEnemyBullet", RpcTarget.All, bulletSpawnPos.transform.position, gun.transform.up);
+        photonView.RPC("SpawnEnemyBullet", RpcTarget.All, bulletSpawnPos.transform.position, gun.transform.forward);
     }
     [PunRPC]
     void SpawnEnemyBullet(Vector3 pos, Vector3 dir)
@@ -141,6 +139,7 @@ public class EnemyController : MonoBehaviourPun
     [PunRPC]
     public void TakeDamage(int damage)
     {
+        Debug.Log("Enemy Damaged.");
         curHp -= damage;
         // update the health bar
         healthBar.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp);

@@ -276,7 +276,7 @@ public class PlayerController : MonoBehaviourPun
         // is this our local player?
         if (photonView.IsMine)
         {
-            if (curAttackerId != 0)
+            if (curAttackerId != 0 && curAttackerId != -1)
                 GameManager.instance.GetPlayer(curAttackerId).photonView.RPC("AddKill", RpcTarget.All);
             // set the cam to spectator
             GetComponentInChildren<CameraController>().SetAsSpectator();
