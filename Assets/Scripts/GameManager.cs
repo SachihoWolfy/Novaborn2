@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviourPun
     [Header("Game Modifiers")]
     public bool pvp;
     public bool debug;
+    public bool cutscene;
     void Awake()
     {
         instance = this;
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviourPun
     void ImInGame()
     {
         playersInGame++;
-        if (PhotonNetwork.IsMasterClient && playersInGame == PhotonNetwork.PlayerList.Length)
+        if (PhotonNetwork.IsMasterClient && playersInGame == PhotonNetwork.PlayerList.Length && !cutscene)
             photonView.RPC("SpawnPlayer", RpcTarget.All);
     }
 
