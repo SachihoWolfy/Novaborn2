@@ -131,7 +131,7 @@ MonoBehaviour:
   moveSpeed: 10
   curHp: 100
   maxHp: 100
-  chaseRange: 100
+  chaseRange: 50
   attackRange: 20
   bulletSpeed: 50
   playerDetectRate: 0.2
