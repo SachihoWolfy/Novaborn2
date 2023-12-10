@@ -1005,6 +1005,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88efc26c156c1a40bcffdc8a4d1d561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: 
+  moveSpeed: 0
+  curHp: 0
+  maxHp: 0
+  chaseRange: 0
+  attackRange: 0
+  bulletSpeed: 0
+  playerDetectRate: 0.2
+  objectToSpawnOnDeath: 
+  damage: 0
+  attackRate: 0
+  shootRange: 0
+  healthBar: {fileID: 0}
+  sr: {fileID: 0}
+  hurtMat: {fileID: 0}
+  normalMat: {fileID: 0}
+  rig: {fileID: 0}
+  moveables: {fileID: 0}
+  gun: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  bulletSpawnPos: {fileID: 0}
+  anim: {fileID: 0}
+  hurt: {fileID: 0}
+  death: {fileID: 0}
+  fire: {fileID: 0}
+  AS: {fileID: 0}
 --- !u!114 &8348246744999528905
 MonoBehaviour:
   m_ObjectHideFlags: 0

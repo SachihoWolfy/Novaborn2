@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviourPun
     public AudioClip shieldGet;
     public AudioClip shieldHurt;
     public AudioClip shieldBreak;
+    [Header("Animation")]
+    public Animator anim;
     [Header("NameTag")]
     [SerializeField] private TextMeshProUGUI nameText;
 
@@ -99,6 +101,8 @@ public class PlayerController : MonoBehaviourPun
         {
             weapon.setIsFiring(false);
             weapon.stopFiring();
+            anim.SetBool("FP", false);
+            if (weapon.AS2.isPlaying) { weapon.AS2.Stop(); anim.SetBool("FP", false); }
         }
         if (Input.GetMouseButtonDown(1))
             TryLargeJump();
@@ -205,6 +209,7 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     public void TakeDamage(int attackerId, int damage)
     {
+        anim.SetBool("FP", false);
         if (dead)
         {
             return;
@@ -234,6 +239,7 @@ public class PlayerController : MonoBehaviourPun
         curAttackerId = attackerId;
         // flash the player red
         photonView.RPC("DamageFlash", RpcTarget.Others);
+        anim.SetTrigger("Hurt");
         // update the health bar UI
         GameUI.instance.UpdateHealthBar();
         GameUI.instance.UpdateShieldBar();
@@ -267,6 +273,7 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     void Die()
     {
+        anim.SetBool("FP", false);
         curHp = 0;
         dead = true;
         GameManager.instance.alivePlayers--;

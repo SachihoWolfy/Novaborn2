@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 6646645577752943351}
   - component: {fileID: 7485795915024121491}
   - component: {fileID: 2158927305759459726}
+  - component: {fileID: 4893633772142781756}
+  - component: {fileID: 7199577850420748106}
   m_Layer: 0
   m_Name: Enemy_Standard
   m_TagString: Enemy
@@ -148,6 +150,7 @@ MonoBehaviour:
   gun: {fileID: 5622840017996416429}
   bulletPrefab: {fileID: 8888302328839130186, guid: e584c9303db467e489b1a35e0eebe47f, type: 3}
   bulletSpawnPos: {fileID: 3362557423350023122}
+  anim: {fileID: 4893633772142781756}
   hurt: {fileID: 8300000, guid: aabbf21aa9d44b44e887b29471c19482, type: 3}
   death: {fileID: 8300000, guid: 46e6021be0576d24c92ed0b32f9dc9cc, type: 3}
   fire: {fileID: 8300000, guid: a3eb708fd33e1724c91289c68f52d6f4, type: 3}
@@ -172,6 +175,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6646645577752943351}
+  - {fileID: 7199577850420748106}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -240,6 +244,55 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &4893633772142781756
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150365511184645458}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 99ac7436e3061f240ab171ac15ea9ff2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7199577850420748106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150365511184645458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 1
+    Name: Shoot
+  - Type: 9
+    SynchronizeType: 1
+    Name: Hurt
+  - Type: 9
+    SynchronizeType: 1
+    Name: Detect
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
 --- !u!1 &765262099604096458
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +549,7 @@ GameObject:
   - component: {fileID: 1512082987725408547}
   - component: {fileID: 6323989548877150728}
   m_Layer: 7
-  m_Name: Hand
+  m_Name: HandR
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

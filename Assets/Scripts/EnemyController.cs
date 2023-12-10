@@ -41,6 +41,7 @@ public class EnemyController : MonoBehaviourPun
     public GameObject gun;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPos;
+    public Animator anim;
     [Header("Sounds")]
     public AudioClip hurt;
     public AudioClip death;
@@ -99,6 +100,7 @@ public class EnemyController : MonoBehaviourPun
         //targetPlayer.photonView.RPC("TakeDamage", targetPlayer.photonPlayer, damage);
         SoundController.instance.PlaySound(AS, fire);
         photonView.RPC("SpawnEnemyBullet", RpcTarget.All, bulletSpawnPos.transform.position, gun.transform.forward);
+        anim.SetTrigger("Shoot");
     }
     [PunRPC]
     void SpawnEnemyBullet(Vector3 pos, Vector3 dir)
@@ -131,7 +133,11 @@ public class EnemyController : MonoBehaviourPun
                 else if (dist < chaseRange)
                 {
                     if (targetPlayer == null)
+                    {
                         targetPlayer = player;
+                        anim.SetTrigger("Detect");
+                    }
+
                 }
             }
         }
@@ -139,6 +145,7 @@ public class EnemyController : MonoBehaviourPun
     [PunRPC]
     public void TakeDamage(int damage)
     {
+        anim.SetTrigger("Hurt");
         Debug.Log("Enemy Damaged.");
         curHp -= damage;
         // update the health bar

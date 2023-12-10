@@ -22,6 +22,7 @@ public class PlayerWeapon : MonoBehaviour
     public Transform bulletSpawnPos;
     private PlayerController player;
     public bool isFiring;
+    public Animator anim;
 
     [Header("Sounds")]
     public AudioSource AS;
@@ -40,6 +41,7 @@ public class PlayerWeapon : MonoBehaviour
     }
     public void TryShoot()
     {
+        anim.SetBool("FP", false);
         if (curFpAmmo > 0) { fpActive = true; } else { fpActive = false; }
         // can we shoot?
         if ((curAmmo <= 0 || Time.time - lastShootTime < shootRate) && !fpActive)
@@ -63,12 +65,13 @@ public class PlayerWeapon : MonoBehaviour
             Debug.Log("Tried Shooting");
             player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, Camera.main.transform.forward);
             SoundController.instance.PlaySound(AS, Shoot);
+            anim.SetTrigger("Shoot");
         }
     }
     public void TryRapidShoot()
     {
-        if (curFpAmmo > 0) { fpActive = true; } else { fpActive = false; }
-        if (fpActive && Time.time - lastShootTime < fpRate && curFpAmmo > 0)
+        if (curFpAmmo > 0) { fpActive = true; } else { fpActive = false; anim.SetBool("FP", false); }
+        if (fpActive && !(Time.time - lastShootTime < fpRate) && curFpAmmo > 0)
         {
             curFpAmmo--;
             lastShootTime = Time.time;
@@ -82,7 +85,7 @@ public class PlayerWeapon : MonoBehaviour
                 AS2.Play(0);
                 SoundController.instance.PlaySound(AS, fpShootMP);
                 isFiring = true;
-
+                anim.SetBool("FP", true);
             }
         }
     }

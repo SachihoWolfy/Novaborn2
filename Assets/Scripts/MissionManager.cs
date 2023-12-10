@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -67,19 +68,23 @@ public class MissionManager : MonoBehaviourPun
         {
             requestedSyncWithHost = false;
             Debug.Log("Host - Answering Sync Request");
-            photonView.RPC("syncMissionToOthers", RpcTarget.Others, numEnemiesKilled, numPlayersFinished, isBossDead);
+            try { photonView.RPC("syncMissionToOthers", RpcTarget.All, numEnemiesKilled, numPlayersFinished, isBossDead); }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex, this);
+            }
             Debug.Log("Host - Answered");
         }
         else if(requestedSyncWithHost && !PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("Client - Is not host but requested to sync is true.");
+            Debug.LogError("Client - Is not host but requested to sync is true.");
         }
     }
     
 
     //Checks if the "Kill certain number of enemies" mission is satisfied.
     void CheckEnemyMission() { 
-        if(numEnemiesKilled >= enemyAmount)
+        if(numEnemiesKilled >= enemyAmount - 1)
         {
             killNumEnemies = false;
             numMissionsRemain--;
@@ -107,6 +112,7 @@ public class MissionManager : MonoBehaviourPun
     //MODIFIER SECTION. Updates Stats and States. Implementation goes here. Other scripts should call these functions.
     public void KillEnemy() {
         numEnemiesKilled++;
+        GameUI.instance.UpdatePlayerInfoText();
         if (!PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("UpdateMissionHost", RpcTarget.MasterClient, 0);
@@ -115,6 +121,7 @@ public class MissionManager : MonoBehaviourPun
     }
     public void enterEnd() {
         numPlayersFinished++;
+        GameUI.instance.UpdatePlayerInfoText();
         if (!PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("UpdateMissionHost", RpcTarget.MasterClient, 1);
@@ -123,6 +130,7 @@ public class MissionManager : MonoBehaviourPun
     }
     public void killedBoss() {
         isBossDead = true;
+        GameUI.instance.UpdatePlayerInfoText();
         if (!PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("UpdateMissionHost", RpcTarget.MasterClient, 2);
@@ -138,17 +146,18 @@ public class MissionManager : MonoBehaviourPun
         {
             case 0:
                 //Number of enemies killed
-                numEnemiesKilled++; break;
+                numEnemiesKilled++; GameUI.instance.UpdatePlayerInfoText(); break;
             case 1:
                 //Updates variable associated with the End Trigger
-                numPlayersFinished++; break;
+                numPlayersFinished++; GameUI.instance.UpdatePlayerInfoText(); break;
             case 2:
                 //Updates if the boss is dead
-                isBossDead = true; break;
+                isBossDead = true; GameUI.instance.UpdatePlayerInfoText(); break;
             default: break;
         }
         requestedSyncWithHost = true;
         Debug.Log("Client - Updated Host and Requesting Sync.");
+        GameUI.instance.UpdatePlayerInfoText();
     }
     // Part 2 of the syncing code. 
     [PunRPC]
@@ -158,6 +167,7 @@ public class MissionManager : MonoBehaviourPun
         numPlayersFinished = Host_NumPlayersFinished;
         isBossDead= Host_BossKilled;
         requestedSyncWithHost = false;
+        GameUI.instance.UpdatePlayerInfoText();
         Debug.Log("Host - Answered the call to Sync.");
     }
 }

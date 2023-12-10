@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 5152120599351766438}
   - component: {fileID: 1021485529815751237}
   - component: {fileID: 2632951323519856365}
+  - component: {fileID: 7678043057932634657}
   m_Layer: 7
   m_Name: Hand
   m_TagString: Player
@@ -569,6 +570,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &7678043057932634657
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5981971895871394244}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe16a576901ff224eb329d72d00acfe0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6827373092090620592
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +848,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88efc26c156c1a40bcffdc8a4d1d561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyName: 
+  moveSpeed: 0
+  curHp: 0
+  maxHp: 0
+  chaseRange: 0
+  attackRange: 0
+  bulletSpeed: 0
+  playerDetectRate: 0.2
+  objectToSpawnOnDeath: 
+  damage: 0
+  attackRate: 0
+  shootRange: 0
+  healthBar: {fileID: 0}
+  sr: {fileID: 0}
+  hurtMat: {fileID: 0}
+  normalMat: {fileID: 0}
+  rig: {fileID: 0}
+  moveables: {fileID: 0}
+  gun: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  bulletSpawnPos: {fileID: 0}
+  hurt: {fileID: 0}
+  death: {fileID: 0}
+  fire: {fileID: 0}
+  AS: {fileID: 0}
 --- !u!114 &4976223419482481044
 MonoBehaviour:
   m_ObjectHideFlags: 0
