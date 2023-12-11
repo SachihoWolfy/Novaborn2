@@ -34,8 +34,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150365511184645458}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.70374936, z: -0, w: 0.7104484}
-  m_LocalPosition: {x: 47, y: 8.33, z: -19.3}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -43,7 +43,7 @@ Transform:
   - {fileID: 1521048816332771601}
   - {fileID: 1468219490912009963}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -89.457, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &4552044676435983833
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -133,13 +133,13 @@ MonoBehaviour:
   moveSpeed: 10
   curHp: 100
   maxHp: 100
-  chaseRange: 50
+  chaseRange: 150
   attackRange: 20
   bulletSpeed: 50
   playerDetectRate: 0.2
   objectToSpawnOnDeath: ShardBox
   damage: 20
-  attackRate: 5
+  attackRate: 4
   shootRange: 30
   healthBar: {fileID: 6193161346908919715}
   sr: {fileID: 5110799308928409123}
@@ -205,7 +205,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.50000006
-  m_Speed: 3.5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -5769,7 +5769,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e144e80ba2eadef4b9bf1b02dbb31b0b, type: 2}
-  - {fileID: 2100000, guid: fe80b084156b01c42b5439a9e35bac06, type: 2}
+  - {fileID: 2100000, guid: 866db103ca3651a4db5e90571904794e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

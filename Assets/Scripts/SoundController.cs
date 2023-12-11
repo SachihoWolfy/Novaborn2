@@ -23,7 +23,7 @@ public class SoundController : MonoBehaviourPun
         audioRPC.minDistance = 25;
         audioRPC.maxDistance = 100;
         audioRPC.clip = clipHolder;
-        audioRPC.Play();
+        audioRPC.PlayOneShot(clipHolder);
         Debug.Log("Played AudioClip over RPC successfully: " + clipName);
     }
     public void PlaySound(AudioSource AS, AudioClip clip)

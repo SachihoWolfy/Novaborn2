@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviourPun
     public float iTime;
     [Header("Components")]
     public Rigidbody rig;
+    public ParticleSystem ps;
     [Header("Arms and Headlight")]
     public GameObject arms;
     public GameObject head;
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviourPun
         if (photonView.IsMine)
         {
             nameText.enabled = false;
+            ps.Stop(false);
             return;
         }
         SetName();

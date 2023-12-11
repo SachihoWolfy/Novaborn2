@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BigBarbara.unity
     guid: 0f1f1ecc13e62f24aa6fa63fd3e18c3f
+  - enabled: 1
+    path: Assets/Scenes/Mission1_Survival.unity
+    guid: 850a451c38b48274b849b00ff6a88461
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

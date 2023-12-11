@@ -16949,6 +16949,7 @@ MonoBehaviour:
   shieldRate: 7
   iTime: 0.01
   rig: {fileID: 7857953312316849747}
+  ps: {fileID: 1874889028636838422}
   arms: {fileID: 7857953312650513395}
   head: {fileID: 7857953312298595558}
   shieldBlock: {fileID: 3237964121828832819}

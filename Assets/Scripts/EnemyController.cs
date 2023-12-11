@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviourPun
             if (dist < shootRange && Time.time - lastAttackTime >= attackRate)
                 Attack();
             // otherwise, do we move after the player?
-            else if (dist > attackRange)
+            else if (dist > attackRange && !(agent.destination.y > 2))
             {
                 Vector3 dir = targetPlayer.transform.position - transform.position;
                 rig.velocity = dir.normalized * moveSpeed;
