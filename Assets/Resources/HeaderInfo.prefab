@@ -649,7 +649,11 @@ MonoBehaviour:
   shieldBar: {fileID: 2911616563809706628}
   EnemyColor:
     serializedVersion: 2
+ Konnor
+    rgba: 25587
+
     rgba: 1937919
+ main
   EnemyGradient: {fileID: 11400000, guid: 69a525efa7e6472eab268f6ea605f06e, type: 2}
 --- !u!1 &6010705059469061457
 GameObject:
