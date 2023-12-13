@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+
 public enum PickupType
 {
     Health,
@@ -15,7 +16,7 @@ public class Pickup : MonoBehaviourPun
 {
     public PickupType type;
     public int value;
-
+    
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Pickup triggered.");
@@ -68,6 +69,8 @@ public class Pickup : MonoBehaviourPun
             }
             else if (type == PickupType.Explosive)
             {
+                Debug.Log("You have collected a shard");
+                player.photonView.RPC("CollectedShards", player.photonPlayer);
                 Debug.Log("Explosive.");
                 //IMPLEMENT LATER
             }

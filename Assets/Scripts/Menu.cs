@@ -15,6 +15,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public GameObject createRoomScreen;
     public GameObject lobbyScreen;
     public GameObject lobbyBrowserScreen;
+    public GameObject LeaderBoardScreen;
     [Header("Main Screen")]
     public Button createRoomButton;
     public Button findRoomButton;
@@ -61,6 +62,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         createRoomScreen.SetActive(false);
         lobbyScreen.SetActive(false);
         lobbyBrowserScreen.SetActive(false);
+        LeaderBoardScreen.SetActive(false);
         // activate the requested screen
         screen.SetActive(true);
         if (screen == lobbyBrowserScreen)
@@ -192,7 +194,9 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         Debug.Log("OnRoomListUpdate called from Photon");
         roomList = allRooms;
     }
-
-
+    public void OnLeaderBoardButton()
+    {
+        SetScreen(LeaderBoardScreen);
+    }
 
 }
