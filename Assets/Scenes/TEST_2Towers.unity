@@ -708,7 +708,6 @@ GameObject:
   m_Component:
   - component: {fileID: 226710124}
   - component: {fileID: 226710123}
-  - component: {fileID: 226710125}
   m_Layer: 0
   m_Name: _MissionManager
   m_TagString: Untagged
@@ -753,28 +752,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &226710125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226710122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 30
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1001 &248964276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4718,7 +4695,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d693a55d0ac74674fa97fa472a7e984a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: d6ff5158dbdacfe4e8442b7cd445ede3, type: 2}
   m_BuildHeightMesh: 1
 --- !u!1001 &1501924605
 PrefabInstance:
