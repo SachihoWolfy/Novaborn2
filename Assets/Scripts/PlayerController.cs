@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviourPun
     public float iTime;
     [Header("Components")]
     public Rigidbody rig;
+    public ParticleSystem ps;
     [Header("Arms and Headlight")]
     public GameObject arms;
     public GameObject head;
@@ -60,6 +61,8 @@ public class PlayerController : MonoBehaviourPun
     public AudioClip shieldGet;
     public AudioClip shieldHurt;
     public AudioClip shieldBreak;
+    [Header("Animation")]
+    public Animator anim;
     [Header("NameTag")]
     [SerializeField] private TextMeshProUGUI nameText;
 
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviourPun
         if (photonView.IsMine)
         {
             nameText.enabled = false;
+            ps.Stop(false);
             return;
         }
         SetName();
@@ -99,6 +103,8 @@ public class PlayerController : MonoBehaviourPun
         {
             weapon.setIsFiring(false);
             weapon.stopFiring();
+            anim.SetBool("FP", false);
+            if (weapon.AS2.isPlaying) { weapon.AS2.Stop(); anim.SetBool("FP", false); }
         }
         if (Input.GetMouseButtonDown(1))
             TryLargeJump();
@@ -205,6 +211,7 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     public void TakeDamage(int attackerId, int damage)
     {
+        anim.SetBool("FP", false);
         if (dead)
         {
             return;
@@ -234,6 +241,7 @@ public class PlayerController : MonoBehaviourPun
         curAttackerId = attackerId;
         // flash the player red
         photonView.RPC("DamageFlash", RpcTarget.Others);
+        anim.SetTrigger("Hurt");
         // update the health bar UI
         GameUI.instance.UpdateHealthBar();
         GameUI.instance.UpdateShieldBar();
@@ -267,6 +275,7 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     void Die()
     {
+        anim.SetBool("FP", false);
         curHp = 0;
         dead = true;
         GameManager.instance.alivePlayers--;
@@ -276,7 +285,7 @@ public class PlayerController : MonoBehaviourPun
         // is this our local player?
         if (photonView.IsMine)
         {
-            if (curAttackerId != 0)
+            if (curAttackerId != 0 && curAttackerId != -1)
                 GameManager.instance.GetPlayer(curAttackerId).photonView.RPC("AddKill", RpcTarget.All);
             // set the cam to spectator
             GetComponentInChildren<CameraController>().SetAsSpectator();

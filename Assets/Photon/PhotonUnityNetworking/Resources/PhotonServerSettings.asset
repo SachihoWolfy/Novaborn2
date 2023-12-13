@@ -58,6 +58,15 @@ MonoBehaviour:
   - JUMPstop
   - PlaySoundRPC
   - Log
+  - FlashDamage
+  - SpawnEnemyBullet
+  - UpdateHealthBar
+  - UpdateShieldBar
+  - TakeDamageEnemy
+  - syncMissionToOthers
+  - UpdateMissionHost
+  - LoseGame
+  - WinGamePVE
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

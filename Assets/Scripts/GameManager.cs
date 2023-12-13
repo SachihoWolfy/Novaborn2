@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviourPun
@@ -17,6 +18,10 @@ public class GameManager : MonoBehaviourPun
     // instance
     public static GameManager instance;
     public float postGameTime;
+    [Header("Game Modifiers")]
+    public bool pvp;
+    public bool debug;
+    public bool cutscene;
     void Awake()
     {
         instance = this;
@@ -33,7 +38,7 @@ public class GameManager : MonoBehaviourPun
     void ImInGame()
     {
         playersInGame++;
-        if (PhotonNetwork.IsMasterClient && playersInGame == PhotonNetwork.PlayerList.Length)
+        if (PhotonNetwork.IsMasterClient && playersInGame == PhotonNetwork.PlayerList.Length && !cutscene)
             photonView.RPC("SpawnPlayer", RpcTarget.All);
     }
 
@@ -69,8 +74,19 @@ public class GameManager : MonoBehaviourPun
 
     public void CheckWinCondition()
     {
-        if (alivePlayers == 1)
+        if (alivePlayers == 1 && pvp && playersInGame > 1)
             photonView.RPC("WinGame", RpcTarget.All, players.First(x => !x.dead).id);
+        if(MissionManager.instance != null)
+        {
+            if (MissionManager.instance.allMissionsComplete)
+            {
+                photonView.RPC("WinGamePVE", RpcTarget.All);
+            }
+            if (alivePlayers == 0)
+            {
+                photonView.RPC("LoseGame", RpcTarget.All);
+            }
+        }
     }
 
     [PunRPC]
@@ -80,8 +96,36 @@ public class GameManager : MonoBehaviourPun
         GameUI.instance.SetWinText(GetPlayer(winningPlayer).photonPlayer.NickName);
         Invoke("GoBackToMenu", postGameTime);
     }
+    [PunRPC]
+    void WinGamePVE()
+    {
+        GameUI.instance.SetWinTextPVE();
+        Invoke("NextMission", postGameTime);
+    }
+    [PunRPC]
+    void LoseGame()
+    {
+        GameUI.instance.SetMissionFailText();
+        Invoke("GoBackToMenu", postGameTime);
+    }
     void GoBackToMenu()
     {
         NetworkManager.instance.ChangeScene("Menu");
+    }
+    void NextMission()
+    {
+        if (debug)
+            GameUI.instance.DEBUG_DeactivateWinText();
+        else
+            NetworkManager.instance.ChangeScene(NameOfSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+    //Got this function online, to save time. https://discussions.unity.com/t/getting-next-scene-name/188003
+    public string NameOfSceneByBuildIndex(int buildIndex)
+    {
+        string path = SceneUtility.GetScenePathByBuildIndex(buildIndex);
+        int slash = path.LastIndexOf('/');
+        string name = path.Substring(slash + 1);
+        int dot = name.LastIndexOf('.');
+        return name.Substring(0, dot);
     }
 }

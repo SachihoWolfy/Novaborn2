@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
         {
             // Handle the collision
             //Debug.Log("Hit: " + hit.collider.name);
-            if (hit.collider.gameObject.tag == "Player" && isMine)
+            if (hit.collider.gameObject.tag == "Player" && isMine && GameManager.instance.pvp)
             {
                 PlayerController player = GameManager.instance.GetPlayer(hit.collider.gameObject);
                 if (player.id != attackerId)
@@ -38,7 +38,12 @@ public class Bullet : MonoBehaviour
                     player.photonView.RPC("TakeDamage", player.photonPlayer, attackerId, damage);
                 }
             }
-            if (hit.collider.gameObject.tag != "Bullet")
+            if (hit.collider.gameObject.tag == "Enemy" && isMine)
+            {
+                EnemyController enemy = hit.collider.GetComponent<EnemyController>();
+                enemy.photonView.RPC("TakeDamage", Photon.Pun.RpcTarget.MasterClient, damage);
+            }
+            if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Pickup")
                 Destroy(gameObject);
         }
     }

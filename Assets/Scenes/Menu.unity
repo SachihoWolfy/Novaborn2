@@ -1437,7 +1437,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: TEST_2Towers
       m_Image: {fileID: 0}
-    - m_Text: BigBarbara
+    - m_Text: Mission1_Survival
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
