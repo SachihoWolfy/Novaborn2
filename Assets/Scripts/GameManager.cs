@@ -76,7 +76,9 @@ public class GameManager : MonoBehaviourPun
     public void CheckWinCondition()
     {
         if (alivePlayers == 1 && pvp && playersInGame > 1)
+        {
             photonView.RPC("WinGame", RpcTarget.All, players.First(x => !x.dead).id);
+        }
         if(MissionManager.instance != null)
         {
             if (MissionManager.instance.allMissionsComplete)
@@ -111,6 +113,7 @@ public class GameManager : MonoBehaviourPun
     }
     void GoBackToMenu()
     {
+        DestroyNetworkManager();
         NetworkManager.instance.ChangeScene("Menu");
     }
     void NextMission()
@@ -126,6 +129,10 @@ public class GameManager : MonoBehaviourPun
                 GoBackToMenu();
             }
         }
+    }
+    void DestroyNetworkManager()
+    {   
+        Destroy(NetworkManager.instance.gameObject);
     }
     //Got this function online, to save time. https://discussions.unity.com/t/getting-next-scene-name/188003
     public string NameOfSceneByBuildIndex(int buildIndex)

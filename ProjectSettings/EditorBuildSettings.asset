@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/LoginScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: d2151cda61487c4419311f03863017a6
   - enabled: 1
@@ -15,10 +18,10 @@ EditorBuildSettings:
     path: Assets/Scenes/TEST_2Towers.unity
     guid: 7dad03cea07c7624a9d66a80dd8522f9
   - enabled: 1
-    path: Assets/Scenes/BigBarbara.unity
-    guid: 0f1f1ecc13e62f24aa6fa63fd3e18c3f
-  - enabled: 1
     path: Assets/Scenes/Mission1_Survival.unity
     guid: 850a451c38b48274b849b00ff6a88461
+  - enabled: 0
+    path: Assets/Scenes/BigBarbara.unity
+    guid: 0f1f1ecc13e62f24aa6fa63fd3e18c3f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
