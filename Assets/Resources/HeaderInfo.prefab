@@ -602,7 +602,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3054085276207124158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5627273263231759064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 829f92132db0d6c4d970c91cf53d1826, type: 3}
+  m_Script: {fileID: 11500000, guid: b52a9db74aa80c14ba327e5c1c06d9b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 7141001408199245351}
@@ -649,7 +649,7 @@ MonoBehaviour:
   shieldBar: {fileID: 2911616563809706628}
   EnemyColor:
     serializedVersion: 2
-    rgba: 31231
+    rgba: 25587
   EnemyGradient: {fileID: 11400000, guid: 69a525efa7e6472eab268f6ea605f06e, type: 2}
 --- !u!1 &6010705059469061457
 GameObject:
