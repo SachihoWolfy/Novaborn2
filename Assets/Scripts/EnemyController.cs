@@ -175,6 +175,10 @@ public class EnemyController : MonoBehaviourPun
     void Die()
     {
         int rand = Random.Range(1, 11);
+        if (rand == 7)
+        {
+            objectToSpawnOnDeath = "ShardBox";
+        }
         if (rand == 10)
         {
             objectToSpawnOnDeath = "AmmoBox";

@@ -64,21 +64,6 @@ public class MissionManager : MonoBehaviourPun
         }
         
         // Checks if client sent a request to sync with host. Called by host to others.
-        if(requestedSyncWithHost && PhotonNetwork.IsMasterClient)
-        {
-            requestedSyncWithHost = false;
-            Debug.Log("Host - Answering Sync Request");
-            try { photonView.RPC("syncMissionToOthers", RpcTarget.All, numEnemiesKilled, numPlayersFinished, isBossDead); }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex, this);
-            }
-            Debug.Log("Host - Answered");
-        }
-        else if(requestedSyncWithHost && !PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogError("Client - Is not host but requested to sync is true.");
-        }
     }
     
 
@@ -110,64 +95,36 @@ public class MissionManager : MonoBehaviourPun
     }
 
     //MODIFIER SECTION. Updates Stats and States. Implementation goes here. Other scripts should call these functions.
-    public void KillEnemy() {
+
+    public void KillEnemy()
+    {
+        photonView.RPC("KillEnemyRPC", RpcTarget.All);
+    }
+
+    public void enterEnd()
+    {
+        photonView.RPC("enterEndRPC", RpcTarget.All);
+    }
+    public void killedBoss()
+    {
+        photonView.RPC("killedBossRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void KillEnemyRPC() {
         numEnemiesKilled++;
         GameUI.instance.UpdatePlayerInfoText();
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("UpdateMissionHost", RpcTarget.MasterClient, 0);
-        }
-        else { requestedSyncWithHost = true; }
     }
-    public void enterEnd() {
+    [PunRPC]
+    public void enterEndRPC() {
         numPlayersFinished++;
         GameUI.instance.UpdatePlayerInfoText();
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("UpdateMissionHost", RpcTarget.MasterClient, 1);
-        }
-        else { requestedSyncWithHost = true; }
     }
-    public void killedBoss() {
+    [PunRPC]
+    public void killedBossRPC() {
         isBossDead = true;
         GameUI.instance.UpdatePlayerInfoText();
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("UpdateMissionHost", RpcTarget.MasterClient, 2);
-        }
-        else {requestedSyncWithHost = true;}
     }
     
     //The host is the one that keeps track of the mission, to keep it simple. This switch case should allow us to easily update the host, and then sync the host information with the others. This is to save on RPCs.
-    [PunRPC]
-    public void UpdateMissionHost(int type)
-    {
-        switch (type)
-        {
-            case 0:
-                //Number of enemies killed
-                numEnemiesKilled++; GameUI.instance.UpdatePlayerInfoText(); break;
-            case 1:
-                //Updates variable associated with the End Trigger
-                numPlayersFinished++; GameUI.instance.UpdatePlayerInfoText(); break;
-            case 2:
-                //Updates if the boss is dead
-                isBossDead = true; GameUI.instance.UpdatePlayerInfoText(); break;
-            default: break;
-        }
-        requestedSyncWithHost = true;
-        Debug.Log("Client - Updated Host and Requesting Sync.");
-        GameUI.instance.UpdatePlayerInfoText();
-    }
-    // Part 2 of the syncing code. 
-    [PunRPC]
-    public void syncMissionToOthers(int Host_enemiesKilled, int Host_NumPlayersFinished, bool Host_BossKilled)
-    {
-        numEnemiesKilled = Host_enemiesKilled;
-        numPlayersFinished = Host_NumPlayersFinished;
-        isBossDead= Host_BossKilled;
-        requestedSyncWithHost = false;
-        GameUI.instance.UpdatePlayerInfoText();
-        Debug.Log("Host - Answered the call to Sync.");
-    }
 }
