@@ -21,7 +21,7 @@ public class LeaderBoard : MonoBehaviour
     {
         GetLeaderboardRequest getLeaderboardRequest = new GetLeaderboardRequest
         {
-            StatisticName = "Most_Shards",
+            StatisticName = "FastestTime",
             MaxResultsCount = 10
         };
         PlayFabClientAPI.GetLeaderboard(getLeaderboardRequest,
@@ -111,7 +111,7 @@ public class LeaderBoard : MonoBehaviour
                 // request.Statistics is a list, so multiple StatisticUpdate objects can be defined if required.
                 Statistics = new List<StatisticUpdate>
         {
-            new StatisticUpdate { StatisticName = "Most_Shards", Value = newScore },
+            new StatisticUpdate { StatisticName = "FastestTime", Value = newScore },
             }
         },
             result => { Debug.Log("User statistics updated"); },

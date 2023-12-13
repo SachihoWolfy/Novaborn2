@@ -5,7 +5,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
-
 public class PlayerController : MonoBehaviourPun
 {
     [Header("Stats")]
@@ -14,8 +13,6 @@ public class PlayerController : MonoBehaviourPun
     public float sprintSpeed;
     public float shieldRate;
     public float iTime;
-    private int shardcollected;
-
     [Header("Components")]
     public Rigidbody rig;
     public ParticleSystem ps;
@@ -343,12 +340,6 @@ public class PlayerController : MonoBehaviourPun
     {
         shieldBlock.GetComponent<MeshRenderer>().material = shieldDownMat;
     }
-    [PunRPC]
-    public void CollectedShards()
-    {
-        shardcollected++;
-        LeaderBoard.instance.SetLeaderboardEntry(shardcollected);
-        Debug.Log("This should work");
-    }
+
     //Figure out how to launch the player with force. This may have something to do with the "Freeze Position" constraint on the rigidBody.
 }
