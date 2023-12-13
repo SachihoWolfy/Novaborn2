@@ -3165,6 +3165,9 @@ MonoBehaviour:
   - {fileID: 2104895611}
   alivePlayers: 0
   postGameTime: 5
+  pvp: 0
+  debug: 0
+  cutscene: 0
 --- !u!114 &1139414935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17023,6 +17026,10 @@ PrefabInstance:
     - target: {fileID: 3141047383384778658, guid: 74a0e86c3e3d2fe4485623a2fa51d8c8, type: 3}
       propertyPath: sceneViewId
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7535663329720441003, guid: 74a0e86c3e3d2fe4485623a2fa51d8c8, type: 3}
+      propertyPath: sceneViewId
+      value: 29
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
