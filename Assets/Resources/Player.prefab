@@ -16940,14 +16940,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7857953312316849746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccadea33edbd8654990f9b402a884cf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 91b32ae345c979545a9f9b4a56ee1d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 10
   sprintSpeed: 15
-  shieldRate: 7
-  iTime: 0.01
+  shieldRate: 5
+  iTime: 0.5
   rig: {fileID: 7857953312316849747}
   ps: {fileID: 1874889028636838422}
   arms: {fileID: 7857953312650513395}
@@ -16970,7 +16970,7 @@ MonoBehaviour:
   mr: {fileID: 7857953312316849745}
   weapon: {fileID: 7855485732972812915}
   AS: {fileID: 5756122312684650584}
-  hurt: {fileID: 8300000, guid: aabbf21aa9d44b44e887b29471c19482, type: 3}
+  hurt: {fileID: 8300000, guid: a45ec0cc3571a644d8abeae8647b74f2, type: 3}
   jump: {fileID: 8300000, guid: 945bc632c2687734891463e93d0dbff0, type: 3}
   heal: {fileID: 8300000, guid: ba526fc0c577b9b4582f5140a4b18ed2, type: 3}
   largeJump: {fileID: 8300000, guid: e76fb12b064f43a40b7a5c82613296db, type: 3}

@@ -5,6 +5,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class LoginRegister : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class LoginRegister : MonoBehaviour
             {
                 SetDisplayText("Logged in as: " + result.PlayFabId, Color.green);
                 playFabId = result.PlayFabId;
+                SceneManager.LoadScene("Menu");
 
                 if (onLoggedIn != null)
                     onLoggedIn.Invoke();
