@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     void SpawnPlayer()
     {
-        GameObject playerObj = PhotonNetwork.Instantiate(playerPrefabLocation, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
+        GameObject playerObj = PhotonNetwork.Instantiate(playerPrefabLocation, spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
         // initialize the player for all other players
         playerObj.GetComponent<PlayerController>().photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
 
@@ -117,7 +118,14 @@ public class GameManager : MonoBehaviourPun
         if (debug)
             GameUI.instance.DEBUG_DeactivateWinText();
         else
-            NetworkManager.instance.ChangeScene(NameOfSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1));
+        {
+            try { NetworkManager.instance.ChangeScene(NameOfSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1)); }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex, this);
+                GoBackToMenu();
+            }
+        }
     }
     //Got this function online, to save time. https://discussions.unity.com/t/getting-next-scene-name/188003
     public string NameOfSceneByBuildIndex(int buildIndex)
