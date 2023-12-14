@@ -27,57 +27,59 @@ public class Pickup : MonoBehaviourPun
         if (other.CompareTag("Player"))
         {
             PlayerController player = GameManager.instance.GetPlayer(other.gameObject);
+            if (player != null)
+            {
+                if (type == PickupType.Health)
+                {
+                    if (player.curHp < player.maxHp)
+                    {
+                        Debug.Log("Heal.");
+                        player.photonView.RPC("Heal", player.photonPlayer, value);
+                    }
+                    else
+                    {
+                        Debug.Log("Rejected. Player is FullHP.");
+                        return;
+                    }
+                }
+                else if (type == PickupType.Ammo)
+                {
+                    if (player.weapon.curFpAmmo < player.weapon.maxFpAmmo)
+                    {
+                        Debug.Log("Ammo.");
+                        player.photonView.RPC("GiveAmmo", player.photonPlayer, value);
+                    }
+                    else
+                    {
+                        Debug.Log("Rejected. Player already has Full FirePower.");
+                        return;
+                    }
+                }
+                else if (type == PickupType.Shield)
+                {
+                    if (player.curShield < 1)
+                    {
+                        Debug.Log("Shield.");
+                        player.photonView.RPC("Shield", player.photonPlayer, value);
+                    }
+                    else
+                    {
+                        Debug.Log("Rejected. Player already has shield.");
+                        return;
+                    }
+                }
+                else if (type == PickupType.Explosive)
+                {
+                    Debug.Log("You have collected a shard");
+                    player.photonView.RPC("CollectedShards", player.photonPlayer);
 
-            if (type == PickupType.Health)
-            {
-                if (player.curHp < player.maxHp)
-                {
-                    Debug.Log("Heal.");
-                    player.photonView.RPC("Heal", player.photonPlayer, value);
+                    //IMPLEMENT LATER
                 }
-                else
-                {
-                    Debug.Log("Rejected. Player is FullHP.");
-                    return;
-                }
-            }
-            else if (type == PickupType.Ammo)
-            {
-                if (player.weapon.curFpAmmo < player.weapon.maxFpAmmo)
-                {
-                    Debug.Log("Ammo.");
-                    player.photonView.RPC("GiveAmmo", player.photonPlayer, value);
-                }
-                else
-                {
-                    Debug.Log("Rejected. Player already has Full FirePower.");
-                    return;
-                }
-            }
-            else if (type == PickupType.Shield)
-            {
-                if (player.curShield < 1)
-                {
-                    Debug.Log("Shield.");
-                    player.photonView.RPC("Shield", player.photonPlayer, value);
-                }
-                else
-                {
-                    Debug.Log("Rejected. Player already has shield.");
-                    return;
-                }
-            }
-            else if (type == PickupType.Explosive)
-            {
-                Debug.Log("You have collected a shard");
-                player.photonView.RPC("CollectedShards", player.photonPlayer);
-                Debug.Log("Explosive.");
-                //IMPLEMENT LATER
-            }
 
 
                 // destroy the object
                 photonView.RPC("DestroyPickup", RpcTarget.AllBuffered);
+            }
         }
     }
 

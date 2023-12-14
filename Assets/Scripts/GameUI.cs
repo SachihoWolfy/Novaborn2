@@ -54,6 +54,8 @@ public class GameUI : MonoBehaviour
             if(MissionManager.instance != null)
             {
                 playerInfoText.text = "<b>Alive:</b> " + GameManager.instance.alivePlayers;
+                LeaderBoard.instance.GetStatistics();
+                playerInfoText.text = playerInfoText.text + "\n<b>Shards: <b>" + LeaderBoard.instance.shardCount;
                 int enemiesLeft = MissionManager.instance.enemyAmount - MissionManager.instance.numEnemiesKilled;
                 if (MissionManager.instance.killNumEnemies) { playerInfoText.text = playerInfoText.text + "\n<b>Enemies Remaining:</b> " + enemiesLeft; }
                 if(MissionManager.instance.getToEnd) { playerInfoText.text = playerInfoText.text + "\n<b>Get To End</b> "; }

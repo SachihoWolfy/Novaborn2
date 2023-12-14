@@ -133,10 +133,6 @@ public class EnemyController : MonoBehaviourPun
                 else if (dist < chaseRange)
                 {
                     //Target first player that enters range.
-                    if (targetPlayer.dead)
-                    {
-                        targetPlayer = null;
-                    }
                     if (targetPlayer == null)
                     {
                         targetPlayer = player;
@@ -147,6 +143,13 @@ public class EnemyController : MonoBehaviourPun
                     {
                         targetPlayer = player;
                         anim.SetTrigger("Detect");
+                    }
+                    if(targetPlayer != null)
+                    {
+                        if (targetPlayer.dead)
+                        {
+                            targetPlayer = null;
+                        }
                     }
                 }
             }
@@ -185,11 +188,11 @@ public class EnemyController : MonoBehaviourPun
     void Die()
     {
         int rand = Random.Range(1, 11);
-        if (rand == 7 || rand == 6)
+        if (rand == 7 || rand == 6|| rand == 5)
         {
             objectToSpawnOnDeath = "ShardBox";
         }
-        if (rand == 10)
+        else if (rand == 10)
         {
             objectToSpawnOnDeath = "AmmoBox";
         }

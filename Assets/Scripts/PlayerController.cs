@@ -348,6 +348,7 @@ public class PlayerController : MonoBehaviourPun
     {
         shardcollected++;
         LeaderBoard.instance.SetLeaderboardEntry(shardcollected);
+        GameUI.instance.UpdatePlayerInfoText();
         Debug.Log("This should work");
     }
     //Figure out how to launch the player with force. This may have something to do with the "Freeze Position" constraint on the rigidBody.

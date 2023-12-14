@@ -10,6 +10,7 @@ public class LeaderBoard : MonoBehaviour
     public GameObject leaderboardCanvas;
     public GameObject[] leaderboardEntries;
     public static LeaderBoard instance;
+    public int shardCount;
 
     void Awake() { instance = this; }
     private void OnEnable()
@@ -123,6 +124,24 @@ public class LeaderBoard : MonoBehaviour
             );
         }
     }
-    
+    public void GetStatistics()
+    {
+        PlayFabClientAPI.GetPlayerStatistics(
+            new GetPlayerStatisticsRequest(),
+            OnGetStatistics,
+            error => Debug.LogError(error.GenerateErrorReport())
+        );
+    }
+
+    void OnGetStatistics(GetPlayerStatisticsResult result)
+    {
+        Debug.Log("Received the following Statistics:");
+        foreach (var eachStat in result.Statistics)
+        {
+            Debug.Log("Statistic (" + eachStat.StatisticName + "): " + eachStat.Value);
+            shardCount = eachStat.Value;
+        }
+    }
+
 }
 
