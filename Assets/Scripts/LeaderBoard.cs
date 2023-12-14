@@ -12,6 +12,10 @@ public class LeaderBoard : MonoBehaviour
     public static LeaderBoard instance;
 
     void Awake() { instance = this; }
+    private void OnEnable()
+    {
+        DisplayLeaderboard();
+    }
     public void OnLoggedIn()
     {
         leaderboardCanvas.SetActive(true);

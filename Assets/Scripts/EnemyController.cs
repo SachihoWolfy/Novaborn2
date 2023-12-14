@@ -132,12 +132,22 @@ public class EnemyController : MonoBehaviourPun
                 }
                 else if (dist < chaseRange)
                 {
+                    //Target first player that enters range.
+                    if (targetPlayer.dead)
+                    {
+                        targetPlayer = null;
+                    }
                     if (targetPlayer == null)
                     {
                         targetPlayer = player;
                         anim.SetTrigger("Detect");
                     }
-
+                    //Change target
+                    else if(Vector3.Distance(player.transform.position, this.transform.position) < Vector3.Distance(targetPlayer.transform.position, this.transform.position))
+                    {
+                        targetPlayer = player;
+                        anim.SetTrigger("Detect");
+                    }
                 }
             }
         }
@@ -175,7 +185,7 @@ public class EnemyController : MonoBehaviourPun
     void Die()
     {
         int rand = Random.Range(1, 11);
-        if (rand == 7)
+        if (rand == 7 || rand == 6)
         {
             objectToSpawnOnDeath = "ShardBox";
         }
