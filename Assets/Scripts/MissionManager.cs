@@ -46,7 +46,6 @@ public class MissionManager : MonoBehaviourPun
         numMissionsRemain = numMissions;
 
         //Set Pvp to False if numMissiosn > 1. These missions are co-op missions.
-        GameManager.instance.pvp = false;
     }
 
     // Update is called once per frame
@@ -58,7 +57,7 @@ public class MissionManager : MonoBehaviourPun
         if (killBoss) { CheckBossMission(); }
 
         // All missions are complete when there is no more remaining missions.
-        if (numMissionsRemain <= 0 && !allMissionsComplete)
+        if (numMissionsRemain <= 0 && !allMissionsComplete && !GameManager.instance.pvp)
         {
             allMissionsComplete = true;
         }
