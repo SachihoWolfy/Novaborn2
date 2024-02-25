@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviourPun
     public GameObject bulletPrefab;
     public Transform bulletSpawnPos;
     public Animator anim;
+    public string deadEnemyName;
     [Header("Sounds")]
     public AudioClip hurt;
     public AudioClip death;
@@ -188,7 +189,7 @@ public class EnemyController : MonoBehaviourPun
     void Die()
     {
         int rand = Random.Range(1, 11);
-        if (rand == 7 || rand == 6|| rand == 5)
+        if (rand == 7 || rand == 6 || rand == 5)
         {
             objectToSpawnOnDeath = "ShardBox";
         }
@@ -206,10 +207,14 @@ public class EnemyController : MonoBehaviourPun
         }
         else
         {
-            objectToSpawnOnDeath = "DeadEnemy";
+            objectToSpawnOnDeath = string.Empty;
         }
         if (objectToSpawnOnDeath != string.Empty)
-            PhotonNetwork.Instantiate(objectToSpawnOnDeath, transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(objectToSpawnOnDeath, transform.position, transform.rotation);
+        if (deadEnemyName != string.Empty)
+        {
+            PhotonNetwork.Instantiate(deadEnemyName, transform.position, transform.rotation);
+        }
         // destroy the object across the network
         SoundController.instance.PlaySound(AS, death);
         PhotonNetwork.Destroy(gameObject);

@@ -1050,6 +1050,7 @@ GameObject:
   - component: {fileID: 7857953312316849747}
   - component: {fileID: -6864321108892176306}
   - component: {fileID: -5287205689110578827}
+  - component: {fileID: 3549453596810268219}
   m_Layer: 0
   m_Name: DeadEnemy
   m_TagString: Player
@@ -1215,6 +1216,18 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &3549453596810268219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7857953312316849746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50adf611ff2ff2b4b8813d60581b7249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7857953312650513395
 GameObject:
   m_ObjectHideFlags: 0

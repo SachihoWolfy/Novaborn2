@@ -20,6 +20,7 @@ public class SoundController : MonoBehaviourPun
         AudioClip clipHolder = AudioClipGetter.instance.GetClip(clipName);
         audioRPC.transform.position = audioTrasform;
         audioRPC.spread = 0;
+        audioRPC.volume = 0.3f;
         audioRPC.spatialBlend = 1;
         audioRPC.minDistance = 25;
         audioRPC.maxDistance = 100;

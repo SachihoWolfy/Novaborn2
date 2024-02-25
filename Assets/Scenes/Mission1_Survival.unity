@@ -1920,9 +1920,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 514b0b05b56dd1c47b2a05614a7b4c7a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 33d3ae0ac8eb82c49ae08218283235ef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.353
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1981,7 +1981,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -12183,7 +12183,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1271188688037966902, guid: 56db41ff7a9f9aa4b89b3c441ab88a7c, type: 3}
       propertyPath: 'm_DirectAudioVolumes.Array.data[0]'
-      value: 0.372
+      value: 0.138
       objectReference: {fileID: 0}
     - target: {fileID: 2340125107031641976, guid: 56db41ff7a9f9aa4b89b3c441ab88a7c, type: 3}
       propertyPath: m_LocalPosition.x
