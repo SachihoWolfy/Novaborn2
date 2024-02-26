@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Mission1_Survival.unity
     guid: 850a451c38b48274b849b00ff6a88461
   - enabled: 1
+    path: Assets/Scenes/TUTORIAL.unity
+    guid: a673c3c380ffb6744aaf879ff5376e9b
+  - enabled: 0
     path: Assets/Scenes/SP_TEST.unity
     guid: b6218b218ea6e9f4d933725e6b6ddeaf
   - enabled: 0
