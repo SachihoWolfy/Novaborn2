@@ -4,12 +4,43 @@ using UnityEngine;
 using Photon.Pun;
 public class EnemySpawner : MonoBehaviourPun
 {
-    public string enemyPrefabPath;
+    enum Type
+    {
+        Standard,
+        Major,
+        Roomba
+    };
+    [SerializeField]
+    Type type = new Type();
+    private string enemyPrefabPath;
     public float maxEnemies;
     public float spawnRadius;
     public float spawnCheckTime;
     private float lastSpawnCheckTime;
     private List<GameObject> curEnemies = new List<GameObject>();
+
+    [Header("Options")]
+    public bool limitedSpawn;
+    public bool debug;
+
+    private void Start()
+    {
+        switch (type)
+        {
+            case Type.Major:
+                enemyPrefabPath = "Major_Enemy";
+                break;
+            case Type.Roomba:
+                enemyPrefabPath = "WheelEnemy";
+                break;
+            case Type.Standard:
+                enemyPrefabPath = "Enemy_Standard";
+                break;
+            default:
+                enemyPrefabPath = "Enemy_Standard";
+                break;
+        }
+    }
 
     void Update()
     {
@@ -19,6 +50,31 @@ public class EnemySpawner : MonoBehaviourPun
         {
             lastSpawnCheckTime = Time.time;
             TrySpawn();
+        }
+        if (debug)
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                switch (enemyPrefabPath)
+                {
+                    case "Major_Enemy":
+                        enemyPrefabPath = "WheelEnemy";
+                        Debug.Log("Changed to ROOMBA");
+                        break;
+                    case "WheelEnemy":
+                        enemyPrefabPath = "Enemy_Standard";
+                        Debug.Log("Changed to Standard");
+                        break;
+                    case "Enemy_Standard":
+                        enemyPrefabPath = "Major_Enemy";
+                        Debug.Log("Changed to Major");
+                        break;
+                    default:
+                        enemyPrefabPath = "Enemy_Standard";
+                        Debug.Log("Your debug failed. Changed to Standard.");
+                        break;
+                }
+            }
         }
     }
 
@@ -31,11 +87,17 @@ public class EnemySpawner : MonoBehaviourPun
                 curEnemies.RemoveAt(x);
         }
         // if we have maxed out our enemies, return
+
         if (curEnemies.Count >= maxEnemies)
+        {
             return;
+        }
         // otherwise, spawn an enemy
         Vector3 randomInCircle = Random.insideUnitCircle * spawnRadius;
         GameObject enemy = PhotonNetwork.Instantiate(enemyPrefabPath, transform.position + randomInCircle, Quaternion.identity);
         curEnemies.Add(enemy);
+        // Then check if we checked off the limited spawn and reached the spawn limit, then destroy ourselves if true.
+        if (curEnemies.Count >= maxEnemies && limitedSpawn)
+            Destroy(this.gameObject);
     }
 }

@@ -998,7 +998,7 @@ MonoBehaviour:
   curHp: 60
   maxHp: 60
   chaseRange: 200
-  attackRange: 3
+  attackRange: 1
   bulletSpeed: 15
   playerDetectRate: 0.2
   objectToSpawnOnDeath: ShardBox

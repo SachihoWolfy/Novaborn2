@@ -49,6 +49,8 @@ public class EnemyController : MonoBehaviourPun
     public AudioClip fire;
     public AudioSource AS;
 
+    //privates
+    private bool panicking;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,32 +63,62 @@ public class EnemyController : MonoBehaviourPun
     void Update()
     {
         if (!PhotonNetwork.IsMasterClient)
+        {
+            agent.enabled = false;
             return;
+        }
+        if (agent.enabled && !agent.isOnNavMesh && !agent.isOnOffMeshLink && !panicking)
+        {
+            Panic();
+        }
         if (targetPlayer != null)
         {
             // calculate the distance
             float dist = Vector3.Distance(transform.position, targetPlayer.transform.position);
-            // look at player
-            AimAtPlayer(moveables);
-            // Aim at player (With gun)
-            AimAtPlayer(gun);
+            // if we're chasing, look at them!
+            if (dist <= chaseRange)
+            {
+                AimAtPlayer(moveables);
+                AimAtPlayer(gun);
+            }
             // if we're able to attack, do so
             if (dist < shootRange && Time.time - lastAttackTime >= attackRate)
-                Attack();
-            // otherwise, do we move after the player?
-            else if (dist > attackRange && !(agent.destination.y > 2))
             {
+
+                // And FIRE!
+                Attack();
+            }
+            // otherwise, do we move after the player?
+            else if (dist > attackRange)
+            {
+                if(agent.isStopped)
+                agent.isStopped = false;
+
                 Vector3 dir = targetPlayer.transform.position - transform.position;
-                rig.velocity = dir.normalized * moveSpeed;
+                //rig.velocity = dir.normalized * moveSpeed;
             }
             else
             {
-                rig.velocity = Vector3.zero;
+                // Stop Everything We're too Close!!!!
+                agent.isStopped = true;
+                //rig.velocity = Vector3.zero;
+                // We also don't look at player.
             }
             agent.destination = targetPlayer.transform.position;
         }
         DetectPlayer();
 
+    }
+
+    // Panic by deactivating and reactivating navmeshAgent until we are on a surface that Navmesh works on.
+    IEnumerator Panic()
+    {
+        yield return new WaitForSeconds(1f);
+        agent.enabled = false;
+        panicking = true;
+        yield return new WaitForSeconds(1f);
+        agent.enabled = true;
+        panicking = false;
     }
 
     // Aims at target player

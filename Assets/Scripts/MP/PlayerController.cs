@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviourPun
     public float shieldRate;
     public float iTime;
     private int shardcollected;
+    private bool godmode;
 
     [Header("Components")]
     public Rigidbody rig;
@@ -122,6 +123,23 @@ public class PlayerController : MonoBehaviourPun
         {
             //Debug.Log("Shield regen unable to at the moment. " + (Time.time - lastShieldTime<shieldRate));
         }
+
+        //DEBUG
+        if (GameManager.instance.debug)
+        {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                photonView.RPC("Heal", photonPlayer, 100);
+            }
+            if (!godmode && Input.GetKeyDown(KeyCode.G))
+            {
+                godmode = true;
+            }
+            if (godmode && Input.GetKeyDown(KeyCode.G))
+            {
+                godmode = false;
+            }
+        }
     }
     void Move()
     {
@@ -214,7 +232,12 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     public void TakeDamage(int attackerId, int damage)
     {
+        //please stop this awful animation ;w;
         anim.SetBool("FP", false);
+        if (godmode)
+        {
+            return;
+        }
         if (dead)
         {
             return;
