@@ -127,19 +127,24 @@ public class PlayerController : MonoBehaviourPun
         //DEBUG
         if (GameManager.instance.debug)
         {
+            // DEBUG HEAL
             if (Input.GetKeyDown(KeyCode.H))
             {
                 photonView.RPC("Heal", photonPlayer, 100);
             }
-            if (!godmode && Input.GetKeyDown(KeyCode.G))
+            //DEBUG GODMODE TOGGLE
+            if (Input.GetKeyDown(KeyCode.G))
             {
-                godmode = true;
-            }
-            if (godmode && Input.GetKeyDown(KeyCode.G))
-            {
-                godmode = false;
+                ToggleGodmode();
             }
         }
+    }
+    void ToggleGodmode()
+    {
+        if (godmode)
+            godmode = false;
+        else
+            godmode = true;
     }
     void Move()
     {
@@ -232,12 +237,12 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     public void TakeDamage(int attackerId, int damage)
     {
-        //please stop this awful animation ;w;
-        anim.SetBool("FP", false);
         if (godmode)
         {
             return;
         }
+        //Gotta stop this freakin animation if it wasn't stopped already
+        anim.SetBool("FP", false);
         if (dead)
         {
             return;

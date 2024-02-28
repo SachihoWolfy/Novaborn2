@@ -20,7 +20,7 @@ public class Pickup : MonoBehaviourPun
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Pickup triggered.");
-
+        // Should turn off code for people who aren't master client.
         if (!PhotonNetwork.IsMasterClient)
             return;
 
@@ -31,7 +31,11 @@ public class Pickup : MonoBehaviourPun
             {
                 if (type == PickupType.Health)
                 {
-                    if (player.curHp < player.maxHp)
+                    Debug.Log("Saw Health Powerup");
+                    // CRUD, this if statement doesn't pass if the player isn't the MasterClient.
+                    // Bandaid it for now, look deeper in the future on why the heck this happens.
+                    // The if statement can't seem to see what player.curHp really is.
+                    if (player.curHp < player.maxHp || !player.photonView.IsMine)
                     {
                         Debug.Log("Heal.");
                         player.photonView.RPC("Heal", player.photonPlayer, value);
