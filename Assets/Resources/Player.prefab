@@ -17052,6 +17052,7 @@ MonoBehaviour:
   Fail: {fileID: 8300000, guid: 8c08980532507494eacedd59b1f33678, type: 3}
   PowerGet: {fileID: 8300000, guid: 79077692c5b61c244ba6e9835615011f, type: 3}
   fpShootMP: {fileID: 8300000, guid: e4f415687d3067848bd5d081bdd76c1a, type: 3}
+  emergenyReload: {fileID: 8300000, guid: 3b379c1da1f46984286fe1ead2c1a938, type: 3}
 --- !u!198 &1874889028636838422
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -22184,6 +22185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61e907afaf2c004c8084ce3dad23131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRB: {fileID: 7857953312316849747}
+  interpTime: 10
+  multiplier: 3
   sensX: 3
   sensY: 3
   minY: -90

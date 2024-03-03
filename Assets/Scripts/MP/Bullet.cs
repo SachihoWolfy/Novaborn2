@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     private int damage;
     private int attackerId;
     private bool isMine;
+    public GameObject impactEffect;
     public Rigidbody rig;
     private Vector3 oldPosition;
 
@@ -47,7 +48,22 @@ public class Bullet : MonoBehaviour
                 }
             }
             if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Pickup")
-                Destroy(gameObject);
+            {
+                if(hit.collider.gameObject.tag == "Player" && isMine)
+                {
+                    PlayerController player = GameManager.instance.GetPlayer(hit.collider.gameObject);
+                    if(player != null)
+                        if (player.photonView.IsMine)
+                        {
+                            return;
+                        }
+                }
+                transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+                GameObject impactSpawn = Instantiate(impactEffect, hit.point, transform.rotation);
+                impactSpawn.transform.forward = this.transform.forward;
+                Destroy(gameObject, 0.2f);
+                this.enabled = false;
+            }
         }
     }
 }

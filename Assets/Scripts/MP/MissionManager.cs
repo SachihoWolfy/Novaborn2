@@ -60,6 +60,7 @@ public class MissionManager : MonoBehaviourPun
         if (numMissionsRemain <= 0 && !allMissionsComplete && !GameManager.instance.pvp)
         {
             allMissionsComplete = true;
+            GameManager.instance.CheckWinCondition();
         }
         
         // Checks if client sent a request to sync with host. Called by host to others.
@@ -93,6 +94,12 @@ public class MissionManager : MonoBehaviourPun
     
     }
 
+    void CheckAllMission()
+    {
+        CheckEnemyMission();
+        CheckEndTriggerMission();
+    }
+
     //MODIFIER SECTION. Updates Stats and States. Implementation goes here. Other scripts should call these functions.
 
     public void KillEnemy()
@@ -117,6 +124,7 @@ public class MissionManager : MonoBehaviourPun
     [PunRPC]
     public void enterEndRPC() {
         numPlayersFinished++;
+        CheckEndTriggerMission();
         GameUI.instance.UpdatePlayerInfoText();
     }
     [PunRPC]

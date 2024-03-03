@@ -32,6 +32,7 @@ public class PlayerWeapon : MonoBehaviour
     public AudioClip Fail;
     public AudioClip PowerGet;
     public AudioClip fpShootMP;
+    public AudioClip emergenyReload;
 
 
     void Awake()
@@ -66,6 +67,21 @@ public class PlayerWeapon : MonoBehaviour
             player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, Camera.main.transform.forward);
             SoundController.instance.PlaySound(AS, Shoot);
             anim.SetTrigger("Shoot");
+        }
+        if (curAmmo <= 0)
+        {
+            StartCoroutine("EmergencyReload");
+        }
+    }
+    IEnumerator EmergencyReload()
+    {
+        GameUI.instance.EmergencyAmmoText();
+        yield return new WaitForSeconds(5f);
+        if(!(curAmmo >= 1))
+        {
+            curAmmo = curAmmo+5;
+            GameUI.instance.UpdateAmmoText();
+            AS.PlayOneShot(emergenyReload);
         }
     }
     public void TryRapidShoot()

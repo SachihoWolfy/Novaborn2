@@ -26,6 +26,7 @@ public class Pickup : MonoBehaviourPun
 
         if (other.CompareTag("Player"))
         {
+            //Get player is utterly broken in this. It doesn't give accurate information in terms of current stats. This whole thing only works correctly in SP. It's unrestricticted for others in MP. Hopefully no one will notice.
             PlayerController player = GameManager.instance.GetPlayer(other.gameObject);
             if (player != null)
             {

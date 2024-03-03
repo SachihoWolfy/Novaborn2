@@ -73,6 +73,20 @@ public class GameUI : MonoBehaviour
     {
         ammoText.text = player.weapon.curAmmo + " / " + player.weapon.maxAmmo;
     }
+    public void EmergencyAmmoText()
+    {
+        StartCoroutine("ReloadText");
+    }
+    IEnumerator ReloadText()
+    {
+        ammoText.text = "RELOADING...";
+        yield return new WaitForSeconds(1.66f);
+        ammoText.text = "RELOADING..";
+        yield return new WaitForSeconds(1.66f);
+        ammoText.text = "RELOADING.";
+        yield return new WaitForSeconds(1.66f);
+        UpdateAmmoText();
+    }
     public void UpdateFPAmmo()
     {
         //Implement a slider

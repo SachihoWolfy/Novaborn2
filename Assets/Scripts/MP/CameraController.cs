@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [Header("Speed FOV")]
+    public Rigidbody playerRB;
+    public float interpTime;
+    public float multiplier;
     [Header("Look Sensitivity")]
     public float sensX;
     public float sensY;
@@ -15,6 +19,7 @@ public class CameraController : MonoBehaviour
     private float rotX;
     private float rotY;
     private bool isSpectator;
+    private float fovStandard = 60;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +60,7 @@ public class CameraController : MonoBehaviour
             // rotate the player horizontally. This is funny
             transform.parent.parent.rotation = Quaternion.Euler(transform.rotation.x, rotX, 0);
         }
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, (playerRB.velocity.magnitude / 10) * 10 + fovStandard, playerRB.velocity.magnitude / 10);
 
 
     }
@@ -62,6 +68,7 @@ public class CameraController : MonoBehaviour
     {
         isSpectator = true;
         transform.parent = null;
+        Camera.main.fieldOfView = fovStandard;
     }
 
 

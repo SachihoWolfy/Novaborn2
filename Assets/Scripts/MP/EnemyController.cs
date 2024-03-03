@@ -42,7 +42,9 @@ public class EnemyController : MonoBehaviourPun
     public GameObject bulletPrefab;
     public Transform bulletSpawnPos;
     public Animator anim;
+    public ParticleSystem laser;
     public string deadEnemyName;
+    private Transform gunDefaultRotation;
     [Header("Sounds")]
     public AudioClip hurt;
     public AudioClip death;
@@ -56,6 +58,7 @@ public class EnemyController : MonoBehaviourPun
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         healthBar.Initialize(enemyName, maxHp);
+        gunDefaultRotation = gun.transform;
     }
 
 
@@ -79,7 +82,18 @@ public class EnemyController : MonoBehaviourPun
             if (dist <= chaseRange)
             {
                 AimAtPlayer(moveables);
+            }
+            if (dist < shootRange)
+            {
                 AimAtPlayer(gun);
+                if (laser.isStopped)
+                {
+                    laser.Play();
+                }
+            } 
+            else if (laser.isPlaying)
+            {
+                laser.Stop();
             }
             // if we're able to attack, do so
             if (dist < shootRange && Time.time - lastAttackTime >= attackRate)
