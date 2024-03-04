@@ -1178,6 +1178,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8888302328839130186, guid: e584c9303db467e489b1a35e0eebe47f, type: 3}
   bulletSpawnPos: {fileID: 5452479414299563511}
   anim: {fileID: 7378948087321416383}
+  laser: {fileID: 3822992814278199566}
   deadEnemyName: DEADMajor_Enemy
   hurt: {fileID: 8300000, guid: 46e6021be0576d24c92ed0b32f9dc9cc, type: 3}
   death: {fileID: 8300000, guid: ea94a96ed459a1d44aee34086354ddea, type: 3}
