@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
                     enemy.photonView.RPC("TakeDamage", Photon.Pun.RpcTarget.MasterClient, damage);
                 }
             }
-            if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Pickup")
+            if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Pickup" && hit.collider.gameObject.tag != "Debug")
             {
                 if(hit.collider.gameObject.tag == "Player" && isMine)
                 {

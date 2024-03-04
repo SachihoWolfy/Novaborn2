@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7226475717863675188}
   - component: {fileID: 5786589041190884887}
   - component: {fileID: 3311215849710785658}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80dbf5e0299d87645ae4b3bdbfae1fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabPath: Enemy_Standard
+  type: 0
   maxEnemies: 1
   spawnRadius: 3
   spawnCheckTime: 10
+  limitedSpawn: 0
+  debug: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Enemy
+  - Debug
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - ThirdPerson
   - FirstPerson
   - Bullet
-  - 
+  - Debug
   - 
   - 
   - 

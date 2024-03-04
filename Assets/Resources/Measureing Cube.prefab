@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3676901825428960052}
   - component: {fileID: 445567148333887309}
   - component: {fileID: 8417659662159229280}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Measureing Cube
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

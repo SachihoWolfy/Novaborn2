@@ -32,7 +32,7 @@ public class EnemyBullet : MonoBehaviour
                 if (player != null)
                    player.photonView.RPC("TakeDamage", player.photonPlayer, -1, damage);
             }
-            if (hit.collider.gameObject.tag != "Bullet")
+            if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Debug" && hit.collider.gameObject.tag != "Enemy")
                 Destroy(gameObject);
         }
     }
