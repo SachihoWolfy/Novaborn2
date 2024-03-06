@@ -12,6 +12,7 @@ public class ActivationTrigger : MonoBehaviour
         foreach(GameObject obj in objectsToActivate)
         {
             if(obj.activeSelf)
+                if(obj != null)
                 obj.SetActive(false);
         }
     }
@@ -21,10 +22,14 @@ public class ActivationTrigger : MonoBehaviour
         if (other.CompareTag("Player") && !isUsed)
         {
             isUsed = true;
-            foreach (GameObject obj in objectsToActivate)
-            {
-                obj.SetActive(true);
-            }
+            if (other.gameObject != null)
+                foreach (GameObject obj in objectsToActivate)
+                {
+                    if (obj != null)
+                        obj.SetActive(true);
+                    else Debug.LogError("ACTIVATION ERROR: Object is NULL");
+                }
+            else Debug.LogError("ACTIVATION ERROR 2, Player is NULL");
         }
     }
 }
