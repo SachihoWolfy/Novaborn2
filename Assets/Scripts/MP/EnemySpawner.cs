@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviourPun
     public float spawnRadius;
     public float spawnCheckTime;
     private float lastSpawnCheckTime;
+    public bool isEnabled = true;
     private List<GameObject> curEnemies = new List<GameObject>();
 
     [Header("Options")]
@@ -44,7 +45,7 @@ public class EnemySpawner : MonoBehaviourPun
 
     void Update()
     {
-        if (!PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient||!isEnabled)
             return;
         if (Time.time - lastSpawnCheckTime > spawnCheckTime)
         {

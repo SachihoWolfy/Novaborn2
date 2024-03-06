@@ -13,7 +13,8 @@ public class ActivationTrigger : MonoBehaviour
         {
             if(obj.activeSelf)
                 if(obj != null)
-                obj.SetActive(false);
+                    if (obj.gameObject.GetComponent<EnemySpawner>() != null)
+                obj.gameObject.GetComponent<EnemySpawner>().isEnabled = false;
         }
     }
 
@@ -26,8 +27,9 @@ public class ActivationTrigger : MonoBehaviour
                 foreach (GameObject obj in objectsToActivate)
                 {
                     if (obj != null)
-                        obj.SetActive(true);
-                    else Debug.LogError("ACTIVATION ERROR: Object is NULL");
+                        if (obj.gameObject.GetComponent<EnemySpawner>() != null)
+                            obj.gameObject.GetComponent<EnemySpawner>().isEnabled = true;
+                        else Debug.LogError("ACTIVATION ERROR: Object is NULL");
                 }
             else Debug.LogError("ACTIVATION ERROR 2, Player is NULL");
         }

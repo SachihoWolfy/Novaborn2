@@ -2522,6 +2522,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6766049091241906264, guid: 49c9bfdafde57b14197935313f895fac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33261,6 +33265,7 @@ MonoBehaviour:
   maxEnemies: 1
   spawnRadius: 3
   spawnCheckTime: 10
+  isEnabled: 1
   limitedSpawn: 0
   debug: 0
 --- !u!65 &1540764505
