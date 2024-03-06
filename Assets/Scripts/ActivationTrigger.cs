@@ -18,7 +18,7 @@ public class ActivationTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && !isUsed)
+        if (other.CompareTag("Player") && !isUsed)
         {
             isUsed = true;
             foreach (GameObject obj in objectsToActivate)
