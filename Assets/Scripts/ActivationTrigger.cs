@@ -14,7 +14,7 @@ public class ActivationTrigger : MonoBehaviour
             if(obj.activeSelf)
                 if(obj != null)
                     if (obj.gameObject.GetComponent<EnemySpawner>() != null)
-                obj.gameObject.GetComponent<EnemySpawner>().isEnabled = false;
+                         obj.gameObject.GetComponent<EnemySpawner>().isEnabled = false;
         }
     }
 
