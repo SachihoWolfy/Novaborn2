@@ -132,7 +132,8 @@ public class GameManager : MonoBehaviourPun
     }
     void DestroyNetworkManager()
     {   
-        Destroy(NetworkManager.instance.gameObject);
+        if(NetworkManager.instance.gameObject!=null)
+            Destroy(NetworkManager.instance.gameObject);
     }
     //Got this function online, to save time. https://discussions.unity.com/t/getting-next-scene-name/188003
     public string NameOfSceneByBuildIndex(int buildIndex)

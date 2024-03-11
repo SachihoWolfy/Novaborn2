@@ -56,8 +56,10 @@ public class PlayerController : MonoBehaviourPun
     private float lastDamageTime;
     public MeshRenderer mr;
     public PlayerWeapon weapon;
+    public int reloadAnimationState = 0;
     [Header("Sounds")]
     public AudioSource AS;
+    public AudioSource AS2;
     public AudioClip hurt;
     public AudioClip jump;
     public AudioClip heal;
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviourPun
     public AudioClip shieldGet;
     public AudioClip shieldHurt;
     public AudioClip shieldBreak;
+    public AudioClip shake;
+    public AudioClip click;
     [Header("Animation")]
     public Animator anim;
     [Header("NameTag")]
@@ -137,6 +141,22 @@ public class PlayerController : MonoBehaviourPun
             {
                 ToggleGodmode();
             }
+        }
+        //Reload Animation Schenanigames
+        switch (reloadAnimationState)
+        {
+            case 0:
+                break;
+            case 1:
+                AS.clip = shake;
+                PlayAnimatedSound();
+                break;
+            case 2:
+                AS2.clip = click;
+                PlayAnimatedSound2();
+                break;
+            default:
+                break;
         }
     }
     void ToggleGodmode()
@@ -380,4 +400,12 @@ public class PlayerController : MonoBehaviourPun
         Debug.Log("This should work");
     }
     //Figure out how to launch the player with force. This may have something to do with the "Freeze Position" constraint on the rigidBody.
+    public void PlayAnimatedSound()
+    {
+        AS.Play();
+    }
+    public void PlayAnimatedSound2()
+    {
+        AS2.Play();
+    }
 }

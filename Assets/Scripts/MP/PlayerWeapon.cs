@@ -76,6 +76,7 @@ public class PlayerWeapon : MonoBehaviour
     IEnumerator EmergencyReload()
     {
         GameUI.instance.EmergencyAmmoText();
+        player.anim.SetTrigger("Reload");
         yield return new WaitForSeconds(5f);
         if(!(curAmmo >= 1))
         {
