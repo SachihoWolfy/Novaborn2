@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
     public float spectatorMoveSpeed;
     private float rotX;
     private float rotY;
+    [SerializeField]
     private bool isSpectator;
     private float fovStandard = 60;
 

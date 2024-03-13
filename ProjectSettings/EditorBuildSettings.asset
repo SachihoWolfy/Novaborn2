@@ -24,9 +24,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Mission1_Survival.unity
     guid: 850a451c38b48274b849b00ff6a88461
   - enabled: 1
+    path: Assets/Scenes/Intro_Cutscene.unity
+    guid: 20591ed116322d548baee1b4120c567e
+  - enabled: 1
     path: Assets/Scenes/TUTORIAL.unity
     guid: a673c3c380ffb6744aaf879ff5376e9b
   - enabled: 1
+    path: Assets/Scenes/Cutscene1.unity
+    guid: a66639877515e1f4594672cd2507b74c
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 6659305cf986dba45ad4b4ffdb5cd1bd
+  - enabled: 0
     path: Assets/Scenes/RedNova.unity
     guid: 840e3c3836bbea34db7432a9643af1f5
   - enabled: 0

@@ -34,6 +34,28 @@ public class GameUI : MonoBehaviour
         UpdatePlayerInfoText();
         UpdateAmmoText();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (healthBar.gameObject.activeSelf)
+            {
+                healthBar.gameObject.SetActive(false);
+                playerInfoText.gameObject.SetActive(false);
+                ammoText.gameObject.SetActive(false);
+                fpBar.gameObject.SetActive(false);
+                shieldBar.gameObject.SetActive(false);
+            }
+            else
+            {
+                healthBar.gameObject.SetActive(true);
+                playerInfoText.gameObject.SetActive(true);
+                ammoText.gameObject.SetActive(true);
+                fpBar.gameObject.SetActive(true);
+                shieldBar.gameObject.SetActive(true);
+            }
+        }
+    }
     public void UpdateHealthBar()
     {
         healthBar.value = player.curHp;

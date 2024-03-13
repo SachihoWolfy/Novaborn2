@@ -113,8 +113,8 @@ public class GameManager : MonoBehaviourPun
     }
     void GoBackToMenu()
     {
-        DestroyNetworkManager();
         NetworkManager.instance.ChangeScene("Menu");
+        DestroyNetworkManager();
     }
     void NextMission()
     {

@@ -42,21 +42,17 @@ public class PlayerWeapon : MonoBehaviour
     }
     public void TryShoot()
     {
-        anim.SetBool("FP", false);
         if (curFpAmmo > 0) { fpActive = true; } else { fpActive = false; }
         // can we shoot?
+
         if ((curAmmo <= 0 || Time.time - lastShootTime < shootRate) && !fpActive)
         {
             Debug.Log("No Shooties");
             AS.PlayOneShot(Fail);
             return;
         }
-
-        if (fpActive && Time.time - lastShootTime < fpRate && curFpAmmo > 0)
-        {
-            //Decrepit FP_Shoot function. FP Shooting is now done by TryRapidShoot()
-        }
         else
+        if(curAmmo > 0)
         {
             curAmmo--;
             lastShootTime = Time.time;
@@ -68,10 +64,21 @@ public class PlayerWeapon : MonoBehaviour
             SoundController.instance.PlaySound(AS, Shoot);
             anim.SetTrigger("Shoot");
         }
+        else
+        {
+            Debug.Log("No Shooties");
+            AS.PlayOneShot(Fail);
+            return;
+        }
         if (curAmmo <= 0)
         {
             StartCoroutine("EmergencyReload");
         }
+    }
+
+    public void ForceFlickerRifle()
+    {
+        StartCoroutine("EmergencyReload");
     }
     IEnumerator EmergencyReload()
     {
@@ -87,7 +94,7 @@ public class PlayerWeapon : MonoBehaviour
     }
     public void TryRapidShoot()
     {
-        if (curFpAmmo > 0) { fpActive = true; } else { fpActive = false; anim.SetBool("FP", false); }
+        if (curFpAmmo > 0 && curAmmo > 0) { fpActive = true; } else { fpActive = false; anim.SetBool("FP", false); }
         if (fpActive && !(Time.time - lastShootTime < fpRate) && curFpAmmo > 0)
         {
             curFpAmmo--;
@@ -104,6 +111,10 @@ public class PlayerWeapon : MonoBehaviour
                 isFiring = true;
                 anim.SetBool("FP", true);
             }
+        }
+        else if (curFpAmmo <= 0)
+        {
+            AS2.Stop();
         }
     }
     public void stopFiring()

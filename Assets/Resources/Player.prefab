@@ -22661,6 +22661,7 @@ MonoBehaviour:
   minY: -90
   maxY: 90
   spectatorMoveSpeed: 10
+  isSpectator: 0
 --- !u!1 &7857953314364755255
 GameObject:
   m_ObjectHideFlags: 0

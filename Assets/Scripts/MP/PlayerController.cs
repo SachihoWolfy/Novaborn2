@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviourPun
         {
             weapon.setIsFiring(false);
             weapon.stopFiring();
+            weapon.AS2.Stop();
             anim.SetBool("FP", false);
             if (weapon.AS2.isPlaying) { weapon.AS2.Stop(); anim.SetBool("FP", false); }
         }
