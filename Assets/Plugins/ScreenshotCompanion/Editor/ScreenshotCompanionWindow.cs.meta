@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 30a11a476af954c41a27ec7c717d0711
+timeCreated: 1474646513
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67779
+  packageName: Screenshot Companion
+  packageVersion: 1.4
+  assetPath: Assets/Plugins/ScreenshotCompanion/Editor/ScreenshotCompanionWindow.cs
+  uploadId: 233484

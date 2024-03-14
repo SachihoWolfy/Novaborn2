@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviourPun
     [Header("Look Sensitivity")]
     public float sensX;
     public float sensY;
+    private float newSens;
     [Header("Clamping")]
     public float minY;
     public float maxY;
@@ -82,6 +83,7 @@ public class PlayerController : MonoBehaviourPun
         {
             nameText.enabled = false;
             ps.Stop(false);
+            UpdateSensitivity();
             return;
         }
         SetName();
@@ -92,9 +94,21 @@ public class PlayerController : MonoBehaviourPun
         nameText.text = photonView.Owner.NickName;
     }
 
+    public void UpdateSensitivity()
+    {
+        newSens = PauseScript.instance.sensitivity;
+        sensX = newSens;
+        sensY = newSens;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (PauseScript.instance.pauseCanvas.activeSelf)
+        {
+            UpdateSensitivity();
+            return;
+        }
         if (!photonView.IsMine || dead)
             return;
         Move();
@@ -144,6 +158,15 @@ public class PlayerController : MonoBehaviourPun
             }
         }
         //Reload Animation Schenanigames
+        DoReloadAnimationSounds();
+    }
+    private void LateUpdate()
+    {
+        rotateArms();
+    }
+
+    void DoReloadAnimationSounds()
+    {
         switch (reloadAnimationState)
         {
             case 0:
@@ -215,14 +238,9 @@ public class PlayerController : MonoBehaviourPun
 
     }
 
-    private void LateUpdate()
-    {
-        rotateArms();
-    }
-
     public void rotateArms()
     {
-        if (photonView.IsMine)
+        if (photonView.IsMine && !PauseScript.instance.pauseCanvas.activeSelf)
         {
             // get the mouse movement inputs
             rotX += Input.GetAxis("Mouse X") * sensX;

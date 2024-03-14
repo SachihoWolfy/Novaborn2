@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     [Header("Look Sensitivity")]
     public float sensX;
     public float sensY;
+    private float newSens;
     [Header("Clamping")]
     public float minY;
     public float maxY;
@@ -27,11 +28,17 @@ public class CameraController : MonoBehaviour
     {
         // lock the cursor to the middle of the screen
         Cursor.lockState = CursorLockMode.Locked;
+        UpdateSensitivity();
     }
 
 
     void LateUpdate()
     {
+        if (PauseScript.instance.pauseCanvas.activeSelf)
+        {
+            UpdateSensitivity();
+            return;
+        }
         // get the mouse movement inputs
         rotX += Input.GetAxis("Mouse X") * sensX;
         rotY += Input.GetAxis("Mouse Y") * sensY;
@@ -64,6 +71,12 @@ public class CameraController : MonoBehaviour
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, (playerRB.velocity.magnitude / 10) * 10 + fovStandard, playerRB.velocity.magnitude / 10);
 
 
+    }
+    public void UpdateSensitivity()
+    {
+        newSens = PauseScript.instance.sensitivity;
+        sensX = newSens;
+        sensY = newSens;
     }
     public void SetAsSpectator()
     {

@@ -28,8 +28,13 @@ public class PauseScript : MonoBehaviour
 
     void TogglePause()
     {
+        if (SceneManager.GetActiveScene().name.Contains("START"))
+        {
+            return;
+        }
         if (pauseCanvas.gameObject.activeSelf)
         {
+            // Turn pause off.
             if(!SceneManager.GetActiveScene().name.Contains("Menu") && !SceneManager.GetActiveScene().name.Contains("Cutscene"))
             {
                 Cursor.lockState = CursorLockMode.Locked;
@@ -39,6 +44,32 @@ public class PauseScript : MonoBehaviour
         }
         else
         {
+            // Turn Pause on.
+            Cursor.lockState = CursorLockMode.None;
+            pauseCanvas.SetActive(true);
+            otherCanvas.SetActive(false);
+        }
+    }
+    // The more forceful version.
+    void TogglePause(bool mode)
+    {
+        if (SceneManager.GetActiveScene().name.Contains("START"))
+        {
+            return;
+        }
+        if (!mode)
+        {
+            //Turn Pause off
+            if(!SceneManager.GetActiveScene().name.Contains("Menu") && !SceneManager.GetActiveScene().name.Contains("Cutscene"))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            pauseCanvas.SetActive(false);
+            otherCanvas.SetActive(true);
+        }
+        else
+        {
+            // Turn Pause on.
             Cursor.lockState = CursorLockMode.None;
             pauseCanvas.SetActive(true);
             otherCanvas.SetActive(false);
@@ -77,6 +108,7 @@ public class PauseScript : MonoBehaviour
         else
         {
             PhotonNetwork.LeaveRoom();
+            TogglePause(false);
             SceneManager.LoadScene("Menu");
         }
     }

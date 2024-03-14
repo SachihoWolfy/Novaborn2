@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c4800cf928fa08a46a09f563e428845a
+timeCreated: 1506263151
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67779
+  packageName: Screenshot Companion
+  packageVersion: 1.4
+  assetPath: Assets/Plugins/ScreenshotCompanion/README.md
+  uploadId: 233484
