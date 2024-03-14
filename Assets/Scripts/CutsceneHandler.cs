@@ -51,6 +51,7 @@ public class CutsceneHandler : MonoBehaviour
         }
         catch(Exception e)
         {
+            Debug.LogWarning("You did not have the meatloaf (Missing Network Manager)" + e);
             SceneManager.LoadScene(nextScene);
         }
     }

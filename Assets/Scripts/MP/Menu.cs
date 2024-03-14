@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 
 public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
@@ -37,6 +38,18 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
     void Start()
     {
+        try
+        {
+            if (NetworkManager.instance.gameObject == null)
+            {
+                SceneManager.LoadScene("START");
+            }
+        }
+        catch(Exception e)
+        {
+            Debug.LogWarning("HECC, THE MEATLOAF (Network manager is missing)" + e);
+            SceneManager.LoadScene("START");
+        }
         PhotonNetwork.OfflineMode = false;
         // disable the menu buttons at the start
         if (createRoomButton != null)

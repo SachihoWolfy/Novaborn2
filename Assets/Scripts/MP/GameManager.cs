@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviourPun
     public bool pvp;
     public bool debug;
     public bool cutscene;
+    public bool disableNextMission;
     void Awake()
     {
         instance = this;
@@ -120,6 +121,10 @@ public class GameManager : MonoBehaviourPun
     {
         if (debug)
             GameUI.instance.DEBUG_DeactivateWinText();
+        else if (disableNextMission)
+        {
+            Invoke("GoBackToMenu", 0.1f);
+        }
         else
         {
             try { NetworkManager.instance.ChangeScene(NameOfSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1)); }
@@ -131,9 +136,11 @@ public class GameManager : MonoBehaviourPun
         }
     }
     void DestroyNetworkManager()
-    {   
-        if(NetworkManager.instance.gameObject!=null)
-            Destroy(NetworkManager.instance.gameObject);
+    {
+        //if(NetworkManager.instance.gameObject!=null)
+        //Destroy(NetworkManager.instance.gameObject);
+        // I don't need to destroy my boy anymore, we worked out our differences.
+        return;
     }
     //Got this function online, to save time. https://discussions.unity.com/t/getting-next-scene-name/188003
     public string NameOfSceneByBuildIndex(int buildIndex)

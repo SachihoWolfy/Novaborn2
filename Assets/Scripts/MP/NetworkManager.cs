@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -12,12 +13,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void Awake()
     {
         if (instance != null && instance != this)
-            gameObject.SetActive(false);
+            // The code that was here before broke, so now its grounded and can't do nothing.
+            DoNothing();
         else
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            StartCoroutine("GoToMenu");
         }
+    }
+
+    IEnumerator GoToMenu()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Menu");
+    }
+    void DoNothing()
+    {
+        // >:(
     }
     // Start is called before the first frame update
     void Start()
