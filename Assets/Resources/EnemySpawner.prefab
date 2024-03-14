@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3311215849710785658}
   m_Layer: 10
   m_Name: EnemySpawner
-  m_TagString: EditorOnly
+  m_TagString: Debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,5 +122,6 @@ MonoBehaviour:
   maxEnemies: 1
   spawnRadius: 3
   spawnCheckTime: 10
+  isEnabled: 1
   limitedSpawn: 0
   debug: 0
