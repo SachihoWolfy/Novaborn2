@@ -150,13 +150,14 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
     }
     public void OnSelectLevel(string levelName)
     {
-        NetworkManager.instance.CreateRoom("Alone");
+        NetworkManager.instance.CreateRoom(string.Empty);
         StartCoroutine(SP_SceneChange(levelName));
     }
 
     IEnumerator SP_SceneChange(string levelName)
     {
         yield return new WaitUntil(()=>PhotonNetwork.InRoom);
+        PhotonNetwork.CurrentRoom.IsOpen = false;
         NetworkManager.instance.photonView.RPC("ChangeScene", RpcTarget.All, levelName);
     }
 

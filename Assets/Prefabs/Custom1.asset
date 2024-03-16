@@ -15,5 +15,5 @@ MonoBehaviour:
   colorMode: 3
   topLeft: {r: 1, g: 1, b: 1, a: 1}
   topRight: {r: 1, g: 1, b: 1, a: 1}
-  bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-  bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  bottomLeft: {r: 0.87843144, g: 0.427451, b: 0, a: 1}
+  bottomRight: {r: 1, g: 0.12941177, b: 0.098039225, a: 1}

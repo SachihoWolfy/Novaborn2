@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public int maxPlayers = 10;
+    public float waitSeconds = 2f;
     // instance
     public static NetworkManager instance;
     void Awake()
@@ -25,7 +26,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     IEnumerator GoToMenu()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waitSeconds);
         SceneManager.LoadScene("Menu");
     }
     void DoNothing()
